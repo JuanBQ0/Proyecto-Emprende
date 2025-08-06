@@ -1,0 +1,24 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+  <div class="bg-white p-8 rounded shadow-md max-w-md w-full">
+    <h2 class="text-2xl font-bold text-center mb-4 text-green-700">Verificación de Correo</h2>
+    <p class="text-sm text-gray-600 mb-6 text-center">Ingresa tu correo institucional para continuar</p>
+
+    <input
+      [(ngModel)]="email"
+      type="email"
+      placeholder="usuario@unicesar.edu.co"
+      class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
+    />
+
+    <div *ngIf="error" class="text-red-600 mt-2 text-sm text-center">
+      {{ error }}
+    </div>
+
+    <button
+      (click)="verificarCorreo()"
+      class="w-full bg-green-600 text-white py-2 px-4 mt-4 rounded hover:bg-green-700 transition"
+    >
+      Verificar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+<div class="max-w-3xl mx-auto mt-10 p-8 bg-white rounded-xl shadow-lg border border-gray-200">
+
+  <h2 class="text-3xl font-bold text-green-800 mb-6 border-b-4 border-yellow-400 pb-2">
+    Registrar Proyecto
+  </h2>
+
+  <form  class="space-y-6">
+    <!-- Campos -->
+    <div>
+      <label class="block font-semibold mb-1 text-gray-800">Nombre del Proyecto</label>
+      <input type="text"
+      [(ngModel)]="proyecto.nombreProyecto"
+        name="nombre" placeholder="Ej: Sistema de riego automatizado"
+        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400" required />
+    </div>
+      <!-- Campo para la Actividad Económica -->
+    <div>
+      <label class="block font-semibold mb-1 text-gray-800">Categoría</label>
+      <select
+        name="categoria"
+        [(ngModel)]="proyecto.categoria"
+        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
+        required>
+        <option value="" disabled selected>Selecciona una categoría</option>
+        <option value="Innovación">Innovación</option>
+        <option value="Social">Social</option>
+        <option value="Ambiental">Ambiental</option>
+      </select>
+    </div>
+
+
+    <!-- Estudiantes -->
+    <!-- estudiante-form.component.html -->
+
+  <label class="block text-xl font-extrabold text-green-800 mb-4 border-b-2 border-yellow-400 pb-2">
+    Datos Estudiantes
+  </label>
+
+  <!-- Recorremos los estudiantes -->
+  @for (estudiante of proyecto.estudiantes; track estudiante; let i = $index) {
+  <div class="border p-4 mb-4 rounded-lg shadow-sm bg-gray-50">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Nombres del estudiante</label>
+        <input type="text" [(ngModel)]="estudiante.nombres" name="nombres{{i}}" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Apellidos del estudiante</label>
+        <input type="text" [(ngModel)]="estudiante.apellidos" name="apellidos{{i}}" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Identificación del estudiante</label>
+        <input type="text" [(ngModel)]="estudiante.identificacion" name="cc{{i}}" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Programa</label>
+        <input type="text" [(ngModel)]="estudiante.programa" name="programa{{i}}" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Celular</label>
+        <input type="text" [(ngModel)]="estudiante.tel" name="programa{{i}}" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Correo Institucional</label>
+        <input type="text" [(ngModel)]="estudiante.correo" name="programa{{i}}" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+    </div>
+
+    <!-- Botón para eliminar -->
+    <button (click)="eliminarEstudiante(i)" type="button"
+      class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
+      Eliminar
+    </button>
+  </div>
+}
+
+
+  <!-- Botón para agregar -->
+  <button (click)="agregarEstudiante()" type="button"
+    class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 transition">
+    + Agregar otro estudiante
+  </button>
+    <!-- REDES SOCIALES -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Redes Sociales</label>
+      <input type="text"
+      [(ngModel)]="proyecto.redesSociales"
+      name="redesSociales"
+       placeholder="Ej: @Bolsos_bonitos"
+      class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
+    </div>
+
+    <!-- Campo para el Logo del Proyecto -->
+    <div class="mb-6">
+      <label class="block font-semibold mb-1 text-gray-800">Logo del Proyecto 📁</label>
+      <input
+        type="file"
+        (change)="onLogoSelected($event)"
+        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
+        accept="image/*"
+      />
+
+      @if (proyecto.logo) {
+        <div class="text-sm text-gray-600 mt-2">
+          Archivo seleccionado: {{ proyecto.logo}}
+        </div>
+      }
+    </div>
+
+
+    <!-- Botón Registro-->
+    <div class="text-right">
+      <div *ngIf="registroExitoso" class="mb-6 p-4 bg-green-100 text-green-800 border border-green-300 rounded">
+        ✅ ¡Proyecto registrado exitosamente!
+      </div>
+
+      <button (click)="registrar()" type="button"
+        class="bg-green-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-800 transition">
+        Registrar Proyecto
+      </button>
+    </div>
+  </form>
+</div>

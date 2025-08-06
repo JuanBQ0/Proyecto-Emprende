@@ -1,0 +1,36 @@
+<div class="w-full mt-0 px-2">
+  <div class="relative w-full h-[800px] rounded-xl overflow-hidden shadow-xl bg-white">
+
+    <!-- Carrusel de imágenes -->
+    @for (image of imagenes; track image; let i = $index) {
+      <div
+        class="absolute top-0 left-0 w-full h-full transition-opacity duration-700"
+        [class.opacity-100]="i === imagenActual"
+        [class.opacity-0]="i !== imagenActual"
+      >
+        <!-- Aquí el cambio importante: object-cover -->
+        <img [src]="image" class="w-full h-full object-cover" />
+      </div>
+    }
+    <!-- Indicadores -->
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-11">
+      @for (image of imagenes; track image; let i = $index) {
+        <button
+          class="h-2 rounded-full transition-all"
+          [ngClass]="{
+            'bg-green-500 w-10': i === imagenActual,
+            'bg-gray-400 w-6 ': i !== imagenActual
+          }"
+          (click)="imagenActual = i"
+        ></button>
+      }
+    </div>
+
+  </div>
+</div>
+
+<div class="w-full mt-16 px-0">
+  <hr class="text-[#b9acac] p-1 mt-4 ">
+  <app-componente-home-page></app-componente-home-page>
+</div>
+

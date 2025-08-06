@@ -1,0 +1,47 @@
+<nav-administrativo placeholder="Buscar por Capital "></nav-administrativo>
+
+<div class="max-w-5xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md border border-green-700">
+  <h2 class="text-3xl font-bold text-green-800 mb-6 border-b-4 border-yellow-400 pb-2 flex items-center space-x-2">
+    <span>📁</span>
+    <span>Proyectos Registrados</span>
+  </h2>
+
+  <table class="w-full table-auto border border-green-300 text-left text-sm">
+    <thead class="bg-green-100 text-green-900">
+      <tr>
+        <th class="p-3 border border-green-300">ID</th>
+        <th class="p-3 border border-green-300">Nombre del Proyecto</th>
+        <th class="p-3 border border-green-300">Categoría</th>
+        <th class="p-3 border border-green-300">Fecha</th>
+        <th class="p-3 border border-green-300">Estudiantes</th>
+        <th class="p-3 border border-green-300">Programa</th>
+        <th class="p-3 border border-green-300">Correo</th>
+        <th class="p-3 border border-green-300">Celular</th>
+        <th class="p-3 border border-green-300">Identificación</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of proyectos; track item.id; let i = $index) {
+        @for (est of item.estudiantes; track est.identificacion; let j = $index) {
+          <tr >
+            <!-- Celdas del proyecto solo en la primera fila del grupo -->
+            @if (j === 0) {
+              <td class="p-3 border border-green-300" [attr.rowspan]="item.estudiantes.length">{{ i + 1 }}</td>
+              <td class="p-3 border border-green-300 font-semibold" [attr.rowspan]="item.estudiantes.length">{{ item.nombreProyecto }}</td>
+              <td class="p-3 border border-green-300" [attr.rowspan]="item.estudiantes.length">{{ item.categoria }}</td>
+              <td class="p-3 border border-green-300" [attr.rowspan]="item.estudiantes.length">{{ item.fecha }}</td>
+            }
+
+            <!-- Celdas del estudiante (se muestran siempre) -->
+            <td class="p-3 border border-green-300">{{ est.nombres }} {{ est.apellidos }}</td>
+            <td class="p-3 border border-green-300">{{ est.programa }}</td>
+            <td class="p-3 border border-green-300">{{ est.correo }}</td>
+            <td class="p-3 border border-green-300">{{ est.tel }}</td>
+            <td class="p-3 border border-green-300">{{ est.identificacion }}</td>
+          </tr>
+        }
+      }
+    </tbody>
+
+  </table>
+</div>
