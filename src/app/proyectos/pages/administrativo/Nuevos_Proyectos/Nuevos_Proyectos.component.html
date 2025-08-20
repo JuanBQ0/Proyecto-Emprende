@@ -1,0 +1,104 @@
+<nav-administrativo></nav-administrativo>
+<div class="p-6">
+  
+  @if (proyectos().length === 0) {
+
+  } @else {
+    @for (proyecto of proyectos(); track proyecto.id) {
+      <div class="bg-white rounded-2xl shadow-md p-5 mb-5 border border-gray-200">
+        <div class="flex flex-col md:flex-row justify-between md:items-center">
+          <div class="mb-4 md:mb-0">
+            <h3 class="text-xl font-semibold text-gray-800">{{ proyecto.titulo }}</h3>
+            <p class="text-sm text-gray-500">👤 Estudiante: {{ proyecto.estudiante }}</p>
+            <p class="text-xs text-gray-400">📅 Enviado: {{ proyecto.fecha | date:'shortDate' }}</p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-2">
+            <button
+              class="bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition"
+              (click)="aprobar(proyecto)"
+            >
+              Aprobar
+            </button>
+            <button
+              class="bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600 transition"
+              (click)="verDetalles(proyecto)"
+            >
+              Ver detalles
+            </button>
+
+            <button class="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600 transition" (click)="EliminarProyecto(proyecto.id)">
+              Rechazar
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  }
+</div>
+
+<!-- Fondo oscuro suave y modal -->
+@if (proyectoSeleccionado) {
+  <div
+    class="fixed inset-0  bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+  >
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-8 relative border border-gray-200">
+
+      <!-- Botón cerrar -->
+      <button
+        (click)="cerrarModal()"
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl"
+        aria-label="Cerrar modal"
+      >
+        ✖
+      </button>
+
+      <!-- Logo del proyecto -->
+      @if (proyectoSeleccionado.logo) {
+        <div class="flex justify-center mb-6">
+          <img
+            [src]="proyectoSeleccionado.logo"
+            alt="Logo del proyecto"
+            class="h-28 object-contain rounded-md shadow"
+          />
+        </div>
+      }
+
+      <!-- Título -->
+      <h3 class="text-3xl font-bold text-green-700 mb-6 text-center">
+        Detalles del Proyecto
+      </h3>
+
+      <!-- Información general -->
+      <div class="space-y-3 text-gray-700 mb-6">
+        <p><span class="font-semibold text-green-800">📌 Nombre:</span> {{ proyectoSeleccionado.nombreProyecto }}</p>
+        <p><span class="font-semibold text-green-800">🏷️ Categoría:</span> {{ proyectoSeleccionado.categoria }}</p>
+        <p><span class="font-semibold text-green-800">📅 Fecha de Registro:</span> {{ proyectoSeleccionado.fecha | date:'medium' }}</p>
+      </div>
+
+      <!-- Estudiantes -->
+      <h4 class="text-xl font-bold text-green-700 mb-4 border-b pb-2">
+        👨‍🎓 Estudiantes Participantes
+      </h4>
+
+      <div class="grid gap-4 max-h-64 overflow-y-auto pr-2">
+        @for (estudiante of proyectoSeleccionado.estudiantes; track estudiante) {
+          <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm">
+            <div class="grid sm:grid-cols-2 gap-2 text-sm text-gray-800">
+              <p><span class="font-medium text-gray-600">Nombre:</span> {{ estudiante.nombres }}</p>
+              <p><span class="font-medium text-gray-600">Apellido:</span> {{ estudiante.apellidos }}</p>
+              <p><span class="font-medium text-gray-600">Programa:</span> {{ estudiante.programa }}</p>
+              <p><span class="font-medium text-gray-600">Correo:</span> {{ estudiante.correo }}</p>
+              <p><span class="font-medium text-gray-600">Genero:</span> {{ estudiante.genero }}</p>
+              <p><span class="font-medium text-gray-600">Pertenece a la UPC:</span> {{ estudiante.EstudianteUPC }}</p>
+              <p><span class="font-medium text-gray-600">Número de contacto:</span> {{ estudiante.tel }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
+
+
+

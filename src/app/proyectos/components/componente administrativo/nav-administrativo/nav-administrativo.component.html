@@ -1,0 +1,59 @@
+<nav class="bg-green-800 text-white px-4 py-2 shadow-xl border border-green-900 my-2 flex justify-between items-center">
+  <!-- Título del sistema -->
+  <div class="text-2xl font-bold tracking-wide flex items-center space-x-2">
+    <a href="/">
+      <img
+        src="https://uede.unicesar.edu.co/assets/img/unidad.jpg"
+        alt="Logo UPC"
+        class="h-16 w-auto rounded-full object-cover"
+      />
+    </a>
+  </div>
+
+  <!-- Links de navegación -->
+  <div class="flex space-x-6 text-lg">
+    <a
+      routerLink="/nuevos_proyectos"
+      routerLinkActive="border-b-2 border-yellow-300 font-semibold"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="hover:text-yellow-300 transition pb-1"
+    >
+
+      Nuevos Proyectos
+      <i class="fas fa-bell"></i>
+    </a>
+
+    <a
+      routerLink="/reporte"
+      routerLinkActive="border-b-2 border-yellow-300 font-semibold"
+      class="hover:text-yellow-300 transition pb-1"
+    >
+      Reportes Proyectos
+    </a>
+
+    <a
+      routerLink="/gestion"
+      routerLinkActive="border-b-2 border-yellow-300 font-semibold"
+      class="hover:text-yellow-300 transition pb-1"
+    >
+      Gestionar Proyectos
+    </a>
+
+    <a
+      routerLink="/nuevo_evento"
+      routerLinkActive="border-b-2 border-yellow-300 font-semibold"
+      class="hover:text-yellow-300 transition pb-1"
+    >
+      Nuevos Eventos
+    </a>
+     <a
+      routerLink="/historial_eventos"
+      routerLinkActive="border-b-2 border-yellow-300 font-semibold"
+      class="hover:text-yellow-300 transition pb-1"
+    >
+      Historial Eventos
+    </a>
+
+  </div>
+
+</nav>

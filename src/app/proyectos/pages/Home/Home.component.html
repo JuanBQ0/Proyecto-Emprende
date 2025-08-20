@@ -1,0 +1,27 @@
+<div class="relative w-full h-[60vh] md:h-[80vh] lg:h-[100vh] shadow-xl bg-black">
+  @for (image of imagenes; track image; let i = $index) {
+    <img
+      [src]="image"
+      class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-4000 ease-in-out"
+      [class.opacity-100]="i === imagenActual"
+      [class.opacity-0]="i !== imagenActual"
+    />
+  }
+
+  <!-- Indicadores -->
+  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+    @for (image of imagenes; track image; let i = $index) {
+      <button
+        class="h-2 rounded-full transition-all"
+        [ngClass]="{
+          'bg-green-500 w-10': i === imagenActual,
+          'bg-gray-400 w-6': i !== imagenActual
+        }"
+        (click)="imagenActual = i"
+      ></button>
+    }
+  </div>
+</div>
+
+
+

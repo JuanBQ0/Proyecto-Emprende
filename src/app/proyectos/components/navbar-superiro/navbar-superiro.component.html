@@ -1,0 +1,65 @@
+<div class="navbar shadow-sm bg-[#ffffff]">
+
+ <div class="navbar-start">
+    <div class="dropdown">
+       <a class="navbar-brand text-4xl " href="/">
+      <img src="image/logo.png" class="max-w-[170px] max-h-[60px] object-contain" alt="Logo Universidad" />
+        </a>
+    </div>
+</div>
+
+
+
+  <div class="navbar-center">
+    <ul class="flex space-x-10 items-center text-gray-800 font-medium text-lg">
+      <li class="text-4xl">
+        <a class="navbar-brand text-4xl " href="/">
+        <span class="text-yellow-200">UE</span>
+        <span class="text-green-400">DE</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/nosotros" class="hover:text-blue-600 transition">
+          <i class="fa-duotone fa-solid fa-child-reaching"></i>
+          Nosotros</a>
+      </li>
+      <li>
+        <a routerLink="/contacto" class="hover:text-blue-600 transition">
+          <i class="fa-duotone fa-regular fa-envelope"></i>
+          Contacto</a>
+      </li>
+      <li>
+        <a routerLink="/eventos" class="hover:text-blue-600 transition">
+        <i class="fa-duotone fa-solid  fa-film"></i>
+         Eventos
+        </a>
+
+      </li>
+      <li>
+        <a routerLink="/admin" class="hover:text-blue-600 transition">
+          <i class="fa-duotone fa-regular  fa-clipboard"></i>
+          Registro de proyecto
+        </a>
+      </li>
+      <li>
+        <a routerLink="/galeria" class="hover:text-blue-600 transition">
+          <i class="fa-duotone fa-solid fa-clipboard-check"></i>
+          Nuestros Proyectos</a>
+      </li>
+    </ul>
+  </div>
+
+
+  <!-- "Boton Login" -->
+  <div class="navbar-end">
+    <a
+      routerLink="/log"
+      class="hidden sm:inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition"
+    >
+      Login Admin
+    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+    </a>
+  </div>
+
+</div>

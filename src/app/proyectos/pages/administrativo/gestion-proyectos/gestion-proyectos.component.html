@@ -1,0 +1,47 @@
+<nav-administrativo></nav-administrativo>
+
+<div class="max-w-full mx-auto mt-10 p-6 bg-white rounded-xl shadow-md border border-green-700">
+  <h2 class="text-3xl font-bold text-green-800 mb-6 border-b-4 border-yellow-400 pb-2 flex items-center space-x-2">
+    <span>📁</span>
+    <span>Proyectos Registrados</span>
+  </h2>
+
+  <table class="w-full table-auto border border-green-300 text-left text-sm">
+    <thead class="bg-green-100 text-green-900">
+      <tr>
+        <th class="p-3 border border-green-300 w-10">ID</th>
+        <th class="p-3 border border-green-300 w-56">Nombre del Proyecto</th>
+        <th class="p-3 border border-green-300 w-32">Categoría</th>
+        <th class="p-3 border border-green-300 w-32">Fecha</th>
+        <th class="p-3 border border-green-300 w-48">Estudiantes</th>
+        <th class="p-3 border border-green-300 w-24">Género</th>
+        <th class="p-3 border border-green-300 w-48">Programa</th>
+        <th class="p-3 border border-green-300 w-64">Correo</th>
+        <th class="p-3 border border-green-300 w-32">Celular</th>
+        <th class="p-3 border border-green-300 w-32">Identificación</th>
+        <th class="p-3 border border-green-300 w-24">Estudiante UPC</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of proyectos; track item.id; let i = $index) {
+        @for (est of item.estudiantes; track est.identificacion; let j = $index) {
+          <tr>
+            @if (j === 0) {
+              <td class="p-3 border border-green-300 font-semibold" [attr.rowspan]="item.estudiantes.length">{{ i + 1 }}</td>
+              <td class="p-3 border border-green-300 font-semibold" [attr.rowspan]="item.estudiantes.length">{{ item.nombreProyecto }}</td>
+              <td class="p-3 border border-green-300" [attr.rowspan]="item.estudiantes.length">{{ item.categoria }}</td>
+              <td class="p-3 border border-green-300" [attr.rowspan]="item.estudiantes.length">{{ item.fecha }}</td>
+            }
+            <td class="p-3 border border-green-300">{{ est.nombres }} {{ est.apellidos }}</td>
+            <td class="p-3 border border-green-300">{{ est.genero }}</td>
+            <td class="p-3 border border-green-300">{{ est.programa }}</td>
+            <td class="p-3 border border-green-300 break-words">{{ est.correo }}</td>
+            <td class="p-3 border border-green-300">{{ est.tel }}</td>
+            <td class="p-3 border border-green-300">{{ est.identificacion }}</td>
+            <td class="p-3 border border-green-300">{{ est.EstudianteUPC === true ? 'Sí' : 'No' }}</td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>
