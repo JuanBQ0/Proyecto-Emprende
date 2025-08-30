@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,   } from '@angular/forms';
-import { Proyecto } from '../../../interface/proyecto.interface';
+import { Proyecto, TipoParticipante } from '../../../interface/proyecto.interface';
 import { ProyectoServices } from '../../../services/proyectos.services';
 import { CategoriaProyecto } from '../../../interface/categoria-proyecto.enum';
 
 
-
 @Component({
   selector: 'app-registro-proyecto',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule ],
   templateUrl: './registro-proyecto.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistroProyectoComponent {
 categorias: string[] = Object.values(CategoriaProyecto);
+TipoParticipante: string[] = Object.values(TipoParticipante);
 registroExitoso: boolean = false;
 
 generos: string[] = ['Masculino', 'Femenino', 'Otro'];
@@ -26,7 +26,6 @@ generos: string[] = ['Masculino', 'Femenino', 'Otro'];
 
   get proyecto(): Proyecto {
     return this.proyectoService.getProyecto();
-
   }
 
   onLogoSelected(event: Event): void {

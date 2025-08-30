@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Proyecto, ProyectoRegistrado } from '../interface/proyecto.interface';
+import { Estudiante, Proyecto, ProyectoRegistrado, TipoParticipante } from '../interface/proyecto.interface';
 import { CategoriaProyecto } from '../interface/categoria-proyecto.enum';
 
 
 @Injectable({providedIn: 'root'})
 export class ProyectoServices {
+categorias: string[] = Object.values(CategoriaProyecto);
 //---------------------------------------------------------------------------------------------------------------------------------
 private proyecto: Proyecto = {
     id:'',
@@ -13,13 +14,13 @@ private proyecto: Proyecto = {
     redesSociales: '',
     logo: null,
     estudiantes: [
-      { nombres: '', apellidos: '', identificacion: '', programa: '', tel: '', correo: '', EstudianteUPC: true , genero: null }
-    ]
+      { nombres: '', apellidos: '', identificacion: '', programa: '', tel: '', correo: '', EstudianteUPC: true , genero: null, tipoParticipante: TipoParticipante.EstudianteEmprendedor }]
   };
 //---------------------------------------------------------------------------------------------------------------------------------
   getProyecto(): Proyecto {
     return this.proyecto;
   }
+
 //---------------------------------------------------------------------------------------------------------------------------------
   setLogo(file: File): void {
     this.proyecto.logo = file;
@@ -27,7 +28,7 @@ private proyecto: Proyecto = {
   }
 //---------------------------------------------------------------------------------------------------------------------------------
   agregarEstudiante(): void {
-    this.proyecto.estudiantes.push({ nombres: '', apellidos: '', identificacion: '', programa: '', tel: '', correo: '', EstudianteUPC: true, genero: null });
+    this.proyecto.estudiantes.push({ nombres: '', apellidos: '', identificacion: '', programa: '', tel: '', correo: '', EstudianteUPC: true, genero: null, tipoParticipante: TipoParticipante.EstudianteEmprendedor  });
   }
 //---------------------------------------------------------------------------------------------------------------------------------
   eliminarEstudiante(index: number): void {
@@ -109,7 +110,7 @@ actualizarProyectosRegistrados(proyectos: ProyectoRegistrado[]) {
       redesSociales: '',
       logo: null,
       estudiantes: [
-        { nombres: '', apellidos: '', identificacion: '', programa: '', tel: '', correo: '', EstudianteUPC: true, genero: null }
+        { nombres: '', apellidos: '', identificacion: '', programa: '', tel: '', correo: '', EstudianteUPC: true, genero: null, tipoParticipante: TipoParticipante.EstudianteEmprendedor  }
       ]
     };
   }

@@ -1,30 +1,33 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ComponenteHomePageComponent } from "../../components/Componente_Home_Page/Componente_Home_Page.component";
-import { LoginComponent } from "../Login/Login.component";
-
+import { ComponenteDecorativoHomeComponent } from "../../components/Componente_Decorativo_Home/Componente_Decorativo_Home.component";
+import { CarruselComponent } from "../../components/Carrusel/Carrusel.component";
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ComponenteDecorativoHomeComponent, CarruselComponent],
   templateUrl: './Home.component.html',
-  styleUrl: './Home.component.css',
 })
-export class HomeComponent implements OnInit {
-imagenActual = 0;
+export class HomeComponent implements OnInit, OnDestroy{
 imagenes: string[] = [
-    'image/primero.jpg',
-    'image/segundo.jpeg',
-    'image/tercero.jpg',
-    'image/cuarto.png',
-    'image/arreglo/upecistas.jpg'
+    'image/Decorador/carrusel.jpg',
+    'image/Decorador/carrusel1.jpg',
+    'image/Decorador/carrusel2.jpg',
+    'image/Decorador/carrusel3.jpg',
   ];
-
+  imagenActual = 0;
+  intervaloId: any;
 
   ngOnInit(): void {
-  setInterval(() => {
-    this.imagenActual = (this.imagenActual + 1) % this.imagenes.length;
-  }, 7000);
+    this.intervaloId = setInterval(() => {
+      this.imagenActual = (this.imagenActual + 1) % this.imagenes.length;
+    }, 6000); 
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervaloId) {
+      clearInterval(this.intervaloId);
+    }
   }
 }

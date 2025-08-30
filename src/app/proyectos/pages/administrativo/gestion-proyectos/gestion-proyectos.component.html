@@ -1,47 +1,85 @@
-<nav-administrativo></nav-administrativo>
+<nav-administrativo class="flex mb-14"></nav-administrativo>
 
-<div class="max-w-full mx-auto mt-10 p-6 bg-white rounded-xl shadow-md border border-green-700">
-  <h2 class="text-3xl font-bold text-green-800 mb-6 border-b-4 border-yellow-400 pb-2 flex items-center space-x-2">
-    <span>📁</span>
-    <span>Proyectos Registrados</span>
-  </h2>
+<div class="min-h-screen bg-green-200 p-6 sm:p-12">
+  <div class="max-w-full mx-auto p-6 bg-white rounded-xl shadow-md border border-green-700">
+    <h2 class="text-2xl sm:text-3xl font-bold text-green-800 mb-6 border-b-4 border-yellow-400 pb-2 flex items-center space-x-2">
+      <span>📁</span>
+      <span>Proyectos Registrados</span>
+    </h2>
 
-  <table class="w-full table-auto border border-green-300 text-left text-sm">
-    <thead class="bg-green-100 text-green-900">
-      <tr>
-        <th class="p-3 border border-green-300 w-10">ID</th>
-        <th class="p-3 border border-green-300 w-56">Nombre del Proyecto</th>
-        <th class="p-3 border border-green-300 w-32">Categoría</th>
-        <th class="p-3 border border-green-300 w-32">Fecha</th>
-        <th class="p-3 border border-green-300 w-48">Estudiantes</th>
-        <th class="p-3 border border-green-300 w-24">Género</th>
-        <th class="p-3 border border-green-300 w-48">Programa</th>
-        <th class="p-3 border border-green-300 w-64">Correo</th>
-        <th class="p-3 border border-green-300 w-32">Celular</th>
-        <th class="p-3 border border-green-300 w-32">Identificación</th>
-        <th class="p-3 border border-green-300 w-24">Estudiante UPC</th>
-      </tr>
-    </thead>
-    <tbody>
+    <!-- 📱 Vista móvil (tarjetas) -->
+    <div class="block sm:hidden space-y-6">
       @for (item of proyectos; track item.id; let i = $index) {
-        @for (est of item.estudiantes; track est.identificacion; let j = $index) {
-          <tr>
-            @if (j === 0) {
-              <td class="p-3 border border-green-300 font-semibold" [attr.rowspan]="item.estudiantes.length">{{ i + 1 }}</td>
-              <td class="p-3 border border-green-300 font-semibold" [attr.rowspan]="item.estudiantes.length">{{ item.nombreProyecto }}</td>
-              <td class="p-3 border border-green-300" [attr.rowspan]="item.estudiantes.length">{{ item.categoria }}</td>
-              <td class="p-3 border border-green-300" [attr.rowspan]="item.estudiantes.length">{{ item.fecha }}</td>
-            }
-            <td class="p-3 border border-green-300">{{ est.nombres }} {{ est.apellidos }}</td>
-            <td class="p-3 border border-green-300">{{ est.genero }}</td>
-            <td class="p-3 border border-green-300">{{ est.programa }}</td>
-            <td class="p-3 border border-green-300 break-words">{{ est.correo }}</td>
-            <td class="p-3 border border-green-300">{{ est.tel }}</td>
-            <td class="p-3 border border-green-300">{{ est.identificacion }}</td>
-            <td class="p-3 border border-green-300">{{ est.EstudianteUPC === true ? 'Sí' : 'No' }}</td>
-          </tr>
-        }
+        <div class="border border-green-300 rounded-lg shadow-sm p-4 bg-green-50">
+          <h3 class="text-lg font-bold text-green-800 mb-2">{{ i + 1 }}. {{ item.nombreProyecto }}</h3>
+          <p class="text-sm text-green-700"><strong>Categoría:</strong> {{ item.categoria }}</p>
+          <p class="text-sm text-green-700"><strong>Fecha:</strong> {{ item.fecha | date: 'dd/MM/yyyy' }}</p>
+
+
+
+          <div class="mt-3">
+            <h4 class="font-semibold text-green-900 mb-2">👥 Estudiantes</h4>
+            <div class="space-y-2">
+              @for (est of item.estudiantes; track est.identificacion) {
+                <div class="border rounded-md p-2 bg-white shadow-sm">
+                  <p class="text-sm"><strong>Nombre:</strong> {{ est.nombres }} {{ est.apellidos }}</p>
+                  <p class="text-sm"><strong>Género:</strong> {{ est.genero }}</p>
+                  <p class="text-sm"><strong>Programa:</strong> {{ est.programa }}</p>
+                  <p class="text-sm"><strong>Correo:</strong> {{ est.correo }}</p>
+                  <p class="text-sm"><strong>Celular:</strong> {{ est.tel }}</p>
+                  <p class="text-sm"><strong>ID:</strong> {{ est.identificacion }}</p>
+                  <p class="text-sm"><strong>UPC:</strong> {{ est.EstudianteUPC === true ? 'Sí' : 'No' }}</p>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
       }
-    </tbody>
-  </table>
+    </div>
+
+    <!-- 💻 Vista escritorio (tabla) -->
+    <div class="hidden sm:block overflow-x-auto">
+      <table class="w-full table-auto border border-green-300 text-left text-sm">
+        <thead class="bg-green-100 text-green-900">
+          <tr>
+            <th class="p-3 border border-green-300 w-10">ID</th>
+            <th class="p-3 border border-green-300 w-56">Nombre del Proyecto</th>
+            <th class="p-3 border border-green-300 w-32">Categoría</th>
+            <th class="p-3 border border-green-300 w-32">Fecha</th>
+            <th class="p-3 border border-green-300 w-48">Estudiantes</th>
+            <th class="p-3 border border-green-300 w-24">Género</th>
+            <th class="p-3 border border-green-300 w-48">Programa</th>
+            <th class="p-3 border border-green-300 w-64">Correo</th>
+            <th class="p-3 border border-green-300 w-32">Celular</th>
+            <th class="p-3 border border-green-300 w-32">Identificación</th>
+            <th class="p-3 border border-green-300 w-24">Estudiante UPC</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of proyectos; track item.id; let i = $index) {
+            @for (est of item.estudiantes; track est.identificacion; let j = $index) {
+              <tr>
+                @if (j === 0) {
+                  <td class="p-3 border border-green-300 font-semibold" [attr.rowspan]="item.estudiantes.length">{{ i + 1 }}</td>
+                  <td class="p-3 border border-green-300 font-semibold" [attr.rowspan]="item.estudiantes.length"> {{ item.nombreProyecto }}</td>
+                  <td class="p-3 border border-green-300" [attr.rowspan]="item.estudiantes.length">{{ item.categoria }}</td>
+                  <td class="p-3 border border-green-300" [attr.rowspan]="item.estudiantes.length">
+                    {{ item.fecha | date: 'dd/MM/yyyy' }}
+                  </td>
+
+                }
+                <td class="p-3 border border-green-300">{{ est.nombres }} {{ est.apellidos }}</td>
+                <td class="p-3 border border-green-300">{{ est.genero }}</td>
+                <td class="p-3 border border-green-300">{{ est.programa }}</td>
+                <td class="p-3 border border-green-300 break-words">{{ est.correo }}</td>
+                <td class="p-3 border border-green-300">{{ est.tel }}</td>
+                <td class="p-3 border border-green-300">{{ est.identificacion }}</td>
+                <td class="p-3 border border-green-300">{{ est.EstudianteUPC === true ? 'Sí' : 'No' }}</td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

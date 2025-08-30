@@ -1,0 +1,36 @@
+.carousel-container {
+  width: 70vw;
+  height: 80vh;
+  margin: 16px auto;
+  background-color: white;
+}
+
+/* ✅ Animación personalizada tipo fade + zoom */
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-zoom-in {
+  animation: fadeZoomIn 4s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+
+/* ✅ Evita parpadeo blanco en imágenes al cargar */
+/* Efecto extra de blur + fade */
+img {
+  background-color: white;
+  transition: opacity 2s ease-in-out, filter 2s ease-in-out;
+}
+
+/* Oculta imágenes sin src */
+img[src=""] {
+  display: none;
+}

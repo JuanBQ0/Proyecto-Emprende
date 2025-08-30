@@ -12,6 +12,6 @@ export enum CategoriaProyecto {
   Financiero = 'Financiero',
   Servicios = 'Servicios',
   Manufactura = 'Manufactura / Producción',
-  Moda = 'Moda y Estilo de Vida'
+  Moda = 'Moda y Estilo'
 }
 

@@ -1,50 +1,57 @@
-<!-- Contenedor completo del footer -->
-  <hr class="h-1 border-0 bg-gradient-to-r from-green-400 via-green-600 to-green-400 my-8" />
-  <footer class="footer sm:footer-horizontal p-6 bg-[#ffffff]">
-    <aside class="text-[#000000]">
-      <div class="navbar-brand text-4xl">
-        <span class="text-[#39b918]">UEDE</span>
-      </div>
-      <p>
-        Bienvenidos a la Unidad de Emprendimiento
-        <br />
-        Correo:
-        <a
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=unidaddeemprendimiento@unicesar.edu.co"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-blue-600 underline"
-        >
-          {{correo}}
-        </a>
-        <br />
-        Contacto +57 3006727983
-      </p>
-    </aside>
+<hr class="h-1 border-0 bg-gradient-to-r from-[#39b918] to-[#39b918]" />
 
-    <nav>
-      <span class="text-[#39b918] footer-title text-3xl">Emprendimiento</span>
+<footer
+  class="p-6 bg-[#ffffff] text-[#000000] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+>
+  <!-- Columna 1 -->
+  <aside class="space-y-2">
+    <div class="navbar-brand text-4xl">
+      <span class="text-[#39b918]">UEDE</span>
+    </div>
+    <p class="text-sm md:text-base">
+      Bienvenidos a la Unidad de Emprendimiento <br />
+      Correo:
       <a
-        class="link link-hover text-[#000000]"
-        href="https://uede.unicesar.edu.co/nosotros"
+        href="https://mail.google.com/mail/?view=cm&fs=1&to=unidaddeemprendimiento@unicesar.edu.co"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-blue-600 underline break-words"
       >
-        Conoce Nuestros Emprendimientos
+        {{correo}}
       </a>
-    </nav>
+      <br />
+      Contacto: +57 3006727983
+    </p>
+  </aside>
 
-    <nav>
-      <span class="footer-title text-3xl text-[#39b918]">La Universidad</span>
-      <a
-        class="link link-hover text-[#000000]"
-        href="https://aulaweb.unicesar.edu.co/"
-      >
-        Ir a Unicesar
-      </a>
-    </nav>
-  </footer>
+  <!-- Columna 2 -->
+  <nav class="space-y-2">
+    <span class="text-[#39b918] footer-title text-2xl md:text-3xl block">
+      Emprendimiento
+    </span>
+    <a
+      class="link link-hover text-[#000000] block"
+      href="https://uede.unicesar.edu.co/nosotros"
+    >
+      Conoce Nuestros Emprendimientos
+    </a>
+  </nav>
 
-  <!-- Barra inferior de derechos reservados -->
-  <div class="bg-[#35963c] text-[#FFFFFF] text-center text-sm">
-    © 2025 Universidad Popular del Cesar. Todos los derechos reservados.
-  </div>
+  <!-- Columna 3 -->
+  <nav class="space-y-2">
+    <span class="footer-title text-2xl md:text-3xl text-[#39b918] block">
+      La Universidad
+    </span>
+    <a
+      class="link link-hover text-[#000000] block"
+      href="https://aulaweb.unicesar.edu.co/"
+    >
+      Ir a Unicesar
+    </a>
+  </nav>
+</footer>
 
+<!-- Barra inferior -->
+<div class="bg-[#35963c] text-[#FFFFFF] text-center text-xs md:text-sm py-2">
+  © 2025 Universidad Popular del Cesar. Todos los derechos reservados.
+</div>

@@ -9,6 +9,13 @@ export interface Proyecto {
   redesSociales?: string;
 }
 
+export enum TipoParticipante {
+  EstudianteEmprendedor = 'Estudiante emprendedor',
+  EgresadoEmprendedor = 'Egresado emprendedor',
+  MicroempresarioExterno = 'Microempresario externo',
+  OpcionDeGrado = 'Opción de grado',
+}
+
 export interface Estudiante {
   programa: string;
   nombres: string;
@@ -18,6 +25,7 @@ export interface Estudiante {
   correo: string;
   EstudianteUPC: boolean;
   genero: string | null;
+  tipoParticipante: TipoParticipante;
 }
 
 export interface ProyectoRegistrado extends Proyecto {

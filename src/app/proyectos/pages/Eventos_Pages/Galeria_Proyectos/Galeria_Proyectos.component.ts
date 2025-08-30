@@ -1,14 +1,18 @@
 import { CommonModule, formatCurrency } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ProyectoServices } from '../../../services/proyectos.services';
+import { DrawGaleriaComponent } from "../../../components/Draw_Galeria/Draw_Galeria.component";
 
 @Component({
   selector: 'app-galeria-proyectos',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DrawGaleriaComponent],
   templateUrl: './Galeria_Proyectos.component.html',
+  styleUrl: './Galeria_Proyectos.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GaleriaProyectosComponent {
+  constructor(public proyectoService: ProyectoServices){}
 
   proyectos = [
   {
