@@ -41,101 +41,112 @@
 
       <!-- Estudiantes -->
       @for (estudiante of proyecto.estudiantes; track estudiante; let i = $index) {
-      <div class="border p-4 mb-4 rounded-lg shadow-sm bg-gray-50">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-          <!-- Nombre -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Nombres</label>
-            <input type="text" [(ngModel)]="estudiante.nombres" name="nombres{{i}}"
-              class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
-          </div>
+  <div class="border p-6 mb-6 rounded-xl shadow bg-white">
+    <h3 class="text-lg font-semibold text-green-700 mb-4">
+      Emprendedor {{ i + 1 }}
+    </h3>
 
-          <!-- Apellidos -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Apellidos</label>
-            <input type="text" [(ngModel)]="estudiante.apellidos" name="apellidos{{i}}"
-              class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
-          </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-          <!-- Identificación -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Identificación</label>
-            <input type="text" [(ngModel)]="estudiante.identificacion" name="cc{{i}}"
-              class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
-          </div>
-
-          <!-- Programa -->
-          <div *ngIf="estudiante.tipoParticipante !== 'Microempresario externo'">
-            <label class="block text-sm font-medium text-gray-700">Programa</label>
-            <input type="text" [(ngModel)]="estudiante.programa" name="programa{{i}}"
-              class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
-          </div>
-
-          <!-- Celular -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Celular</label>
-            <input type="text" [(ngModel)]="estudiante.tel" name="tel{{i}}"
-              class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
-          </div>
-
-          <!-- Correo -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Correo</label>
-            <input type="email" [(ngModel)]="estudiante.correo" name="correo{{i}}"
-              class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
-          </div>
-
-          <!-- Género -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Género</label>
-            <select [(ngModel)]="estudiante.genero" name="genero{{i}}"
-              class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" required>
-              <option value="" disabled selected>Selecciona un género</option>
-              <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
-            </select>
-          </div>
-
-          <!-- Tipo Participante -->
-          <div>
-            <label class="block font-semibold mb-1 text-gray-800">Selecciona a cual perteneces</label>
-            <select [(ngModel)]="estudiante.tipoParticipante" name="tipoParticipante{{i}}"
-              class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400" required>
-              <option value="" disabled selected>Selecciona una categoría</option>
-              <option *ngFor="let cat of TipoParticipante" [value]="cat">{{ cat }}</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Es estudiante UPC -->
-        <div class="mb-4">
-          <label class="block font-medium mb-2 text-green-800">¿Es estudiante de la Universidad Popular del Cesar?</label>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <label class="inline-flex items-center gap-2">
-              <input type="radio" name="estudianteUPC{{i}}" [(ngModel)]="estudiante.EstudianteUPC" [value]="true"
-                class="form-radio text-blue-600" />
-              <span class="text-gray-800">Sí</span>
-            </label>
-            <label class="inline-flex items-center gap-2">
-              <input type="radio" name="estudianteUPC{{i}}" [(ngModel)]="estudiante.EstudianteUPC" [value]="false"
-                class="form-radio text-blue-600" />
-              <span class="text-gray-800">No</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Botón Eliminar -->
-        <button (click)="eliminarEstudiante(i)" type="button"
-          class="w-full sm:w-auto bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600 transition">
-          Eliminar
-        </button>
+      <!-- Nombre -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nombres</label>
+        <input type="text" [(ngModel)]="estudiante.nombres" name="nombres{{i}}"
+          class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
       </div>
-      }
 
-      <!-- Botón Agregar -->
-      <button (click)="agregarEstudiante()" type="button"
-        class="w-full sm:w-auto bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-        + Agregar otro Emprendedor
+      <!-- Apellidos -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Apellidos</label>
+        <input type="text" [(ngModel)]="estudiante.apellidos" name="apellidos{{i}}"
+          class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+
+      <!-- Identificación -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Identificación</label>
+        <input type="text" [(ngModel)]="estudiante.identificacion" name="cc{{i}}"
+          class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+
+      <!-- Programa -->
+      <div *ngIf="estudiante.tipoParticipante !== 'Microempresario externo'">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Programa</label>
+        <input type="text" [(ngModel)]="estudiante.programa" name="programa{{i}}"
+          class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+
+      <!-- Celular -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Celular</label>
+        <input type="text" [(ngModel)]="estudiante.tel" name="tel{{i}}"
+          class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+
+      <!-- Correo -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Correo</label>
+        <input type="email" [(ngModel)]="estudiante.correo" name="correo{{i}}"
+          class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+      </div>
+
+      <!-- Género -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Género</label>
+        <select [(ngModel)]="estudiante.genero" name="genero{{i}}"
+          class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" required>
+          <option value="" disabled selected>Selecciona un género</option>
+          <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
+        </select>
+      </div>
+
+      <!-- Tipo Participante -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
+        <select [(ngModel)]="estudiante.tipoParticipante" name="tipoParticipante{{i}}"
+          class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" required>
+          <option value="" disabled selected>Selecciona una categoría</option>
+          <option *ngFor="let cat of TipoParticipante" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Es estudiante UPC -->
+    <div class="mt-6">
+      <label class="block text-sm font-medium text-green-800 mb-2">
+        ¿Es estudiante de la Universidad Popular del Cesar?
+      </label>
+      <div class="flex flex-col sm:flex-row gap-6">
+        <label class="inline-flex items-center gap-2">
+          <input type="radio" name="estudianteUPC{{i}}" [(ngModel)]="estudiante.EstudianteUPC" [value]="true"
+            class="text-green-600 focus:ring-green-400" />
+          <span class="text-gray-800">Sí</span>
+        </label>
+        <label class="inline-flex items-center gap-2">
+          <input type="radio" name="estudianteUPC{{i}}" [(ngModel)]="estudiante.EstudianteUPC" [value]="false"
+            class="text-green-600 focus:ring-green-400" />
+          <span class="text-gray-800">No</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Botón Eliminar -->
+    <div class="mt-6 flex justify-end">
+      <button (click)="eliminarEstudiante(i)" type="button"
+        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+        Eliminar
       </button>
+    </div>
+  </div>
+}
+
+<!-- Botón Agregar -->
+<div class="mt-6">
+  <button (click)="agregarEstudiante()" type="button"
+    class="bg-green-600 text-white px-5 py-3 rounded-lg hover:bg-green-700 transition w-full sm:w-auto">
+    + Agregar otro Emprendedor
+  </button>
+</div>
 
       <!-- Redes Sociales -->
       <div>
