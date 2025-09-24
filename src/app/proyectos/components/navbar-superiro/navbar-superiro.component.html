@@ -1,0 +1,88 @@
+<div class="shadow-sm bg-white fixed top-0 left-0 w-full z-50">
+  <!-- Navbar principal -->
+  <div class="relative flex items-center px-4 py-5">
+
+    <!-- Logo (izquierda) -->
+    <div class="flex items-center">
+      <a routerLink="/" class="flex items-center">
+        <img src="image/logo.png" class="max-w-[150px] max-h-[50px] object-contain" alt="Logo Universidad" />
+      </a>
+    </div>
+
+    <!-- Menú centrado (solo en escritorio) -->
+    <div
+      class="hidden lg:flex absolute left-1/2 -translate-x-1/2 space-x-10 text-gray-800 font-medium text-lg"
+    >
+      <a routerLink="/nosotros" class="hover:text-blue-600 transition flex items-center gap-2">
+        <i class="fa-solid fa-child-reaching"></i>
+        Nosotros
+      </a>
+      <a routerLink="/contacto" class="hover:text-blue-600 transition flex items-center gap-2">
+        <i class="fa-regular fa-envelope"></i>
+        Contacto
+      </a>
+      <a routerLink="/eventos" class="hover:text-blue-600 transition flex items-center gap-2">
+        <i class="fa-solid fa-film"></i>
+        Eventos
+      </a>
+      <a routerLink="/admin" class="hover:text-blue-600 transition flex items-center gap-2">
+        <i class="fa-regular fa-clipboard"></i>
+        Registro de proyecto
+      </a>
+      <a routerLink="/galeria" class="hover:text-blue-600 transition flex items-center gap-2">
+        <i class="fa-solid fa-clipboard-check"></i>
+        Nuestros Proyectos
+      </a>
+    </div>
+
+    <!-- Login (derecha en escritorio) -->
+    <div class="hidden lg:flex ml-auto">
+      <a
+        routerLink="/log"
+        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition flex items-center gap-2"
+      >
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        Login Admin
+      </a>
+    </div>
+
+    <!-- Botón hamburguesa (móvil) -->
+    <div class="lg:hidden ml-auto">
+      <button (click)="toggleMenu()" class="text-gray-800 text-3xl">
+        <i class="fa-solid fa-bars" *ngIf="!isMenuOpen"></i>
+        <i class="fa-solid fa-xmark" *ngIf="isMenuOpen"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú en móvil -->
+  <!-- Menú en móvil -->
+<div *ngIf="isMenuOpen" class="lg:hidden flex flex-col items-center space-y-4 py-4 bg-white shadow text-lg">
+  <a routerLink="/nosotros" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
+    <i class="fa-solid fa-child-reaching"></i>
+    Nosotros
+  </a>
+  <a routerLink="/contacto" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
+    <i class="fa-regular fa-envelope"></i>
+    Contacto
+  </a>
+  <a routerLink="/eventos" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
+    <i class="fa-solid fa-film"></i>
+    Eventos
+  </a>
+  <a routerLink="/admin" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
+    <i class="fa-regular fa-clipboard"></i>
+    Registro de proyecto
+  </a>
+  <a routerLink="/galeria" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
+    <i class="fa-solid fa-clipboard-check"></i>
+    Nuestros Proyectos
+  </a>
+  <a routerLink="/log" (click)="isMenuOpen = false"
+     class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition flex items-center gap-2">
+    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+    Login Admin
+  </a>
+</div>
+
+</div>

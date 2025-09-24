@@ -1,0 +1,9 @@
+<app-navbar-superior *ngIf="mostrarElementos"></app-navbar-superior>
+
+<div class="flex flex-col min-h-screen">
+  <main class="flex-grow relative w-full overflow-hidden m-0 p-0">
+    <router-outlet></router-outlet>
+  </main>
+
+  <shared-footer *ngIf="mostrarElementos" class="m-0 p-0"></shared-footer>
+</div>

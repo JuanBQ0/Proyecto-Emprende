@@ -1,0 +1,67 @@
+<div class="loginPage flex">
+  <div class="container flex">
+    <div class="videoDiv">
+
+      <img
+      src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDIzazcwODNoMnhhdHI4MnJ0d2NwcDFnN2Nkcjk2cTBxMGRwa2Z1YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fYwf8g1BEvKYb68yO9/giphy.gif"
+      alt="gif divertido"
+      class="w-64 h-auto rounded-lg shadow-lg"
+      width="480"
+      height="270"
+      frameBorder="0"
+      class="rounded-lg shadow"
+      allowFullScreen
+      />
+
+      <div class="footerDiv flex">
+        <span >Solo Personal Autorizado</span>
+      </div>
+    </div>
+
+    <div class="formDiv w-full h-full flex flex-col justify-center items-center">
+      <div>
+        <h1 class="title text-4xl font-bold text-center text-pink-800 mb-2">Unidad de Empremdimiento</h1>
+      </div>
+
+      <form class="form grid" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <div class="inputDiv">
+    <label for="username" class="username">Usuario</label>
+    <div class="w-full">
+      <input
+        placeholder="Ingrese su usuario"
+        type="text"
+        id="username"
+        name="email"
+        required
+        [(ngModel)]="email"
+        class="input"
+      />
+    </div>
+  </div>
+
+  <div class="inputDiv">
+    <label for="password" class="password">Contraseña</label>
+    <div class="w-full">
+      <input
+        placeholder="Ingrese su contraseña"
+        type="password"
+        id="password"
+        name="password"
+        required
+        [(ngModel)]="password"
+        class="input"
+      />
+    </div>
+  </div>
+
+  <button type="submit" class="btn flex bg-amber-300">
+    <a
+      routerLink="/nuevos_proyectos">
+      Inicio de Sesion
+    </a>
+  </button>
+
+</form>
+    </div>
+  </div>
+</div>

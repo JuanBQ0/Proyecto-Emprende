@@ -1,0 +1,116 @@
+<nav class="bg-green-800 text-white px-4 py-2  shadow-xl fixed top-0 left-0 w-full z-50">
+  <div class="flex justify-between items-center">
+    <!-- Logo -->
+    <div class="flex items-center space-x-2">
+      <a routerLink="/">
+        <img
+          src="https://uede.unicesar.edu.co/assets/img/unidad.jpg"
+          alt="Logo UPC"
+          class="h-12 sm:h-16 w-auto rounded-full object-cover"
+        />
+      </a>
+    </div>
+
+    <!-- Botón hamburguesa (móvil) -->
+    <div class="lg:hidden">
+      <button (click)="isMenuOpen = !isMenuOpen" class="text-white text-3xl focus:outline-none">
+        <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+      </button>
+    </div>
+
+    <!-- Links escritorio -->
+    <div class="hidden lg:flex space-x-6 text-lg">
+      <a
+        routerLink="/nuevos_proyectos"
+        routerLinkActive="border-b-2 border-yellow-300 font-semibold"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="hover:text-yellow-300 transition pb-1 flex items-center gap-2"
+      >
+        Nuevos Proyectos <i class="fas fa-bell"></i>
+      </a>
+
+      <a
+        routerLink="/reporte"
+        routerLinkActive="border-b-2 border-yellow-300 font-semibold"
+        class="hover:text-yellow-300 transition pb-1"
+      >
+        Reportes Proyectos
+      </a>
+
+      <a
+        routerLink="/gestion"
+        routerLinkActive="border-b-2 border-yellow-300 font-semibold"
+        class="hover:text-yellow-300 transition pb-1"
+      >
+        Gestionar Proyectos
+      </a>
+
+      <a
+        routerLink="/nuevo_evento"
+        routerLinkActive="border-b-2 border-yellow-300 font-semibold"
+        class="hover:text-yellow-300 transition pb-1"
+      >
+        Nuevos Eventos
+      </a>
+
+      <a
+        routerLink="/historial_eventos"
+        routerLinkActive="border-b-2 border-yellow-300 font-semibold"
+        class="hover:text-yellow-300 transition pb-1"
+      >
+        Historial Eventos
+      </a>
+    </div>
+  </div>
+
+  <!-- Links móvil -->
+  <div
+    *ngIf="isMenuOpen"
+    class="lg:hidden flex flex-col items-center space-y-4 py-4 bg-green-900 text-lg"
+  >
+    <a
+      routerLink="/nuevos_proyectos"
+      (click)="isMenuOpen = false"
+      routerLinkActive="text-yellow-300 font-semibold"
+      class="hover:text-yellow-300 transition"
+    >
+      Nuevos Proyectos
+    </a>
+
+    <a
+      routerLink="/reporte"
+      (click)="isMenuOpen = false"
+      routerLinkActive="text-yellow-300 font-semibold"
+      class="hover:text-yellow-300 transition"
+    >
+      Reportes Proyectos
+    </a>
+
+    <a
+      routerLink="/gestion"
+      (click)="isMenuOpen = false"
+      routerLinkActive="text-yellow-300 font-semibold"
+      class="hover:text-yellow-300 transition"
+    >
+      Gestionar Proyectos
+    </a>
+
+    <a
+      routerLink="/nuevo_evento"
+      (click)="isMenuOpen = false"
+      routerLinkActive="text-yellow-300 font-semibold"
+      class="hover:text-yellow-300 transition"
+    >
+      Nuevos Eventos
+    </a>
+
+    <a
+      routerLink="/historial_eventos"
+      (click)="isMenuOpen = false"
+      routerLinkActive="text-yellow-300 font-semibold"
+      class="hover:text-yellow-300 transition"
+    >
+      Historial Eventos
+    </a>
+  </div>
+</nav>

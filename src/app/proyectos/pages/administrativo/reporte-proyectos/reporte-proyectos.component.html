@@ -1,0 +1,70 @@
+<nav-administrativo class="flex mb-14"></nav-administrativo>
+
+<div class="min-h-screen bg-green-200 p-4 sm:p-6 md:p-12">
+  <div class="max-w-6xl mx-auto p-6 sm:p-8 md:p-10 bg-white rounded-2xl shadow-xl border border-green-700">
+    <!-- Encabezado -->
+    <h2
+      class="text-3xl font-bold text-green-800 mb-8 border-b-4 border-yellow-400 pb-3 flex items-center space-x-3"
+    >
+      <span class="text-2xl">📊</span>
+      <span>Estadísticas de Proyectos</span>
+    </h2>
+
+    <!-- 🔹 Estadísticas principales -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+      <!-- Total proyectos -->
+      <div class="bg-green-100 p-6 rounded-2xl shadow-md border border-green-300 text-center">
+        <p class="text-4xl font-extrabold text-green-800">{{ totalProyectos }}</p>
+        <p class="text-green-900 font-semibold mt-2">Proyectos en total</p>
+      </div>
+
+      <!-- UPCistas -->
+      <div class="bg-yellow-100 p-6 rounded-2xl shadow-md border border-yellow-300 text-center">
+        <p class="text-4xl font-extrabold text-yellow-700">{{ totalUPCistas }}</p>
+        <p class="text-yellow-900 font-semibold mt-2">Estudiantes Upecistas</p>
+      </div>
+
+      <!-- Egresados -->
+      <div class="bg-red-100 p-6 rounded-2xl shadow-md border border-red-300 text-center">
+        <p class="text-4xl font-extrabold text-red-800">{{ totalEgresados }}</p>
+        <p class="text-red-900 font-semibold mt-2">Egresados emprendedores</p>
+      </div>
+    </div>
+
+    <!-- 🔹 Categorías -->
+<div class="mb-10">
+  <h3
+    class="text-2xl font-semibold text-green-800 mb-4 border-b-2 border-green-300 pb-2 flex items-center space-x-2"
+  >
+    <span>📂</span>
+    <span>Proyectos por categoría</span>
+  </h3>
+  <ul class="list-disc list-inside space-y-2 text-green-900 font-medium text-base">
+    @for (cat of proyectosPorCategoria | keyvalue; track cat.key) {
+      <li>
+        {{ cat.key }}: {{ cat.value }} proyectos
+      </li>
+    }
+  </ul>
+</div>
+
+<!-- 🔹 Tipos de participantes -->
+<div>
+  <h3
+    class="text-2xl font-semibold text-green-800 mb-4 border-b-2 border-green-300 pb-2 flex items-center space-x-2"
+  >
+    <span>👥</span>
+    <span>Participantes por tipo</span>
+  </h3>
+  <ul class="list-disc list-inside space-y-2 text-green-900 font-medium text-base">
+    @for (tipo of (participantesPorTipo | keyvalue); track tipo.key) {
+  <li>
+    {{ tipo.key }}: {{ tipo.value }}
+  </li>
+}
+
+  </ul>
+</div>
+
+  </div>
+</div>

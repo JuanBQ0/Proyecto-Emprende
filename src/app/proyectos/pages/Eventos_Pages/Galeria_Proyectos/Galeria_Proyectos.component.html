@@ -1,0 +1,100 @@
+<div class="flex flex-col md:flex-row min-h-screen bg-cover bg-center" style="background-image: url('image/Decorador/galerias.jpg');">
+  <!-- Drawer -->
+  <app-draw-galeria
+    class="w-full md:w-[260px] bg-[#828382] p-2 mb-4 md:mb-0 md:mr-6  shadow-md md:shadow-none flex flex-col"
+  >
+  </app-draw-galeria>
+
+  <!-- Contenido principal -->
+  <div class="flex-1 flex flex-col p-6 md:p-8">
+    <!-- Título -->
+    <div class="md:p-16">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">
+      Proyectos destacados
+    </h2>
+    </div>
+
+
+    <!-- Grid de Proyectos -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      @for (proyecto of proyectosFiltrados; track proyecto.id) {
+        <div (click)="abrirModal(proyecto)" class="bg-white rounded-xl shadow hover:shadow-xl transition-transform hover:scale-[1.03] cursor-pointer overflow-hidden">
+          <!-- Imagen del proyecto -->
+          <div class="aspect-square w-full">
+            <img [src]="proyecto.logo || 'assets/img/default-project.png'" alt="Logo" class="w-full h-full object-cover rounded-t-xl">
+          </div>
+
+          <!-- Información -->
+          <div class="p-4 flex flex-col space-y-2 text-center">
+            <h3 class="font-semibold text-gray-900">{{ proyecto.nombreProyecto }}</h3>
+            <p class="text-gray-500 italic">{{ proyecto.categoria }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+@if (proyectoSeleccionado) {
+  <div class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl p-6 relative border border-gray-200 overflow-y-auto max-h-[90vh]">
+
+      <!-- Botón cerrar -->
+      <button
+        (click)="cerrarModal()"
+        class="absolute top-4 right-4 text-gray-400 hover:text-red-600 text-2xl"
+        aria-label="Cerrar modal"
+      >
+        ✖
+      </button>
+
+      <!-- Imagen grande -->
+      <div class="flex justify-center mb-6">
+        <img
+          [src]="proyectoSeleccionado.logo || 'assets/img/default-project.png'"
+          alt="Logo del proyecto"
+          class="max-h-[350px] w-auto rounded-lg shadow-md"
+        />
+      </div>
+
+      <!-- Información del Proyecto -->
+      <h3 class="text-3xl font-bold text-green-700 text-center mb-4">
+        {{ proyectoSeleccionado.nombreProyecto }}
+      </h3>
+      <p class="text-sm text-gray-500 italic text-center mb-6">
+        {{ proyectoSeleccionado.categoria }}
+      </p>
+      <p class="text-gray-700 text-center mb-6">
+        🌐 {{ proyectoSeleccionado.redesSociales }}
+      </p>
+
+      <!-- Lista de Estudiantes -->
+      <div class="mt-6">
+        <h4 class="text-lg font-semibold text-gray-800 mb-2 text-center">
+          Estudiantes Participantes
+        </h4>
+
+        <div
+          class="grid gap-4"
+          [ngClass]="{
+              'grid-cols-1': proyectoSeleccionado.estudiantes.length === 1,
+              'grid-cols-2': (proyectoSeleccionado.estudiantes.length || 0) > 1
+            }"
+        >
+          @for (estudiante of proyectoSeleccionado.estudiantes; track estudiante.identificacion) {
+            <div class="bg-gray-100 rounded-lg p-4 shadow flex flex-col justify-center text-center">
+              <p class="font-medium text-gray-900">
+                {{ estudiante.nombres }} {{ estudiante.apellidos }}
+              </p>
+              <p class="text-sm text-gray-600">Programa: {{ estudiante.programa }}</p>
+              <p class="text-sm text-gray-600">Tel: {{ estudiante.tel }}</p>
+              <p class="text-sm text-gray-600">Correo: {{ estudiante.correo }}</p>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </div>
+}
