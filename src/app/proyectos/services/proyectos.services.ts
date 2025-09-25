@@ -58,6 +58,13 @@ private proyecto: Proyecto = {
     return mensaje;
   }
 //---------------------------------------------------------------------------------------------------------------------------------
+  eliminarProyecto(id: string) {
+  let proyectos = this.obtenerProyectosAprobados();
+  proyectos = proyectos.filter(p => p.id !== id);
+  localStorage.setItem('proyectosAprobados', JSON.stringify(proyectos));
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------
   private fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -102,6 +109,8 @@ aprobarProyecto(proyecto: ProyectoRegistrado): void {
 
   console.log('Proyecto aprobado y movido a proyectosAprobados:', proyecto);
 }
+//---------------------------------------------------------------------------------------------------------------------------------
+
 //---------------------------------------------------------------------------------------------------------------------------------
 obtenerProyectosAprobados(): ProyectoRegistrado[] {
   const data = localStorage.getItem('proyectosAprobados');

@@ -6,7 +6,7 @@ import { CommonModule, KeyValuePipe } from '@angular/common';
 
 @Component({
   selector: 'app-reporte-proyectos',
-  standalone: true, 
+  standalone: true,
   imports: [NavAdministrativoComponent, CommonModule, KeyValuePipe],
   templateUrl: './reporte-proyectos.component.html',
   styleUrls: ['./reporte-proyectos.component.css'],
@@ -19,7 +19,7 @@ export class ReporteProyectosComponent implements OnInit {
   proyectosPorCategoria: { [key: string]: number } = {};
   participantesPorTipo: { [key in TipoParticipante]?: number } = {};
   totalUPCistas = 0;
-  totalEgresados = 0; // 👈 inicialízala en 0 para evitar undefined
+  totalEgresados = 0; 
 
   ngOnInit(): void {
     const guardados = localStorage.getItem('proyectosAprobados');

@@ -11,7 +11,6 @@ import { NuevosProyectosComponent } from './proyectos/pages/administrativo/Nuevo
 import { NuevoEventoComponent } from './proyectos/pages/administrativo/Nuevo_Evento/Nuevo_Evento.component';
 import { GaleriaProyectosComponent } from './proyectos/pages/Eventos_Pages/Galeria_Proyectos/Galeria_Proyectos.component';
 import { HistortialEventosComponent } from './proyectos/pages/administrativo/Histortial_Eventos/Histortial_Eventos.component';
-import { ComponenteDecorativoHomeComponent } from './proyectos/components/Componente_Decorativo_Home/Componente_Decorativo_Home.component';
 
 export const routes: Routes = [
   {

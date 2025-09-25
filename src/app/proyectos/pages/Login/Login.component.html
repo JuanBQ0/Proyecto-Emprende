@@ -19,49 +19,49 @@
     </div>
 
     <div class="formDiv w-full h-full flex flex-col justify-center items-center">
-      <div>
-        <h1 class="title text-4xl font-bold text-center text-pink-800 mb-2">Unidad de Empremdimiento</h1>
+        <div>
+          <h1 class="title text-4xl font-bold text-center text-pink-800 mb-2">Unidad de Empremdimiento</h1>
+        </div>
+
+        <form class="form grid" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="inputDiv">
+        <label for="username" class="username">Usuario</label>
+        <div class="w-full">
+          <input
+            placeholder="Ingrese su usuario"
+            type="text"
+            id="username"
+            name="email"
+            required
+            [(ngModel)]="email"
+            class="input"
+          />
+        </div>
       </div>
 
-      <form class="form grid" (ngSubmit)="onSubmit()" #loginForm="ngForm">
-  <div class="inputDiv">
-    <label for="username" class="username">Usuario</label>
-    <div class="w-full">
-      <input
-        placeholder="Ingrese su usuario"
-        type="text"
-        id="username"
-        name="email"
-        required
-        [(ngModel)]="email"
-        class="input"
-      />
-    </div>
-  </div>
+      <div class="inputDiv">
+        <label for="password" class="password">Contraseña</label>
+        <div class="w-full">
+          <input
+            placeholder="Ingrese su contraseña"
+            type="password"
+            id="password"
+            name="password"
+            required
+            [(ngModel)]="password"
+            class="input"
+          />
+        </div>
+      </div>
 
-  <div class="inputDiv">
-    <label for="password" class="password">Contraseña</label>
-    <div class="w-full">
-      <input
-        placeholder="Ingrese su contraseña"
-        type="password"
-        id="password"
-        name="password"
-        required
-        [(ngModel)]="password"
-        class="input"
-      />
-    </div>
-  </div>
+      <button type="submit" class="btn flex bg-amber-300">
+        <a
+          routerLink="/nuevos_proyectos">
+          Inicio de Sesion
+        </a>
+      </button>
 
-  <button type="submit" class="btn flex bg-amber-300">
-    <a
-      routerLink="/nuevos_proyectos">
-      Inicio de Sesion
-    </a>
-  </button>
-
-</form>
+      </form>
     </div>
   </div>
 </div>

@@ -11,8 +11,7 @@
 
     <!-- Menú centrado (solo en escritorio) -->
     <div
-      class="hidden lg:flex absolute left-1/2 -translate-x-1/2 space-x-10 text-gray-800 font-medium text-lg"
-    >
+      class="hidden lg:flex absolute left-1/2 -translate-x-1/2 space-x-10 text-gray-800 font-medium text-lg">
       <a routerLink="/nosotros" class="hover:text-blue-600 transition flex items-center gap-2">
         <i class="fa-solid fa-child-reaching"></i>
         Nosotros
@@ -39,8 +38,7 @@
     <div class="hidden lg:flex ml-auto">
       <a
         routerLink="/log"
-        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition flex items-center gap-2"
-      >
+        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition flex items-center gap-2">
         <i class="fa-solid fa-arrow-right-to-bracket"></i>
         Login Admin
       </a>
@@ -56,33 +54,32 @@
   </div>
 
   <!-- Menú en móvil -->
-  <!-- Menú en móvil -->
-<div *ngIf="isMenuOpen" class="lg:hidden flex flex-col items-center space-y-4 py-4 bg-white shadow text-lg">
-  <a routerLink="/nosotros" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
-    <i class="fa-solid fa-child-reaching"></i>
-    Nosotros
-  </a>
-  <a routerLink="/contacto" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
-    <i class="fa-regular fa-envelope"></i>
-    Contacto
-  </a>
-  <a routerLink="/eventos" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
-    <i class="fa-solid fa-film"></i>
-    Eventos
-  </a>
-  <a routerLink="/admin" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
-    <i class="fa-regular fa-clipboard"></i>
-    Registro de proyecto
-  </a>
-  <a routerLink="/galeria" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
-    <i class="fa-solid fa-clipboard-check"></i>
-    Nuestros Proyectos
-  </a>
-  <a routerLink="/log" (click)="isMenuOpen = false"
-     class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition flex items-center gap-2">
-    <i class="fa-solid fa-arrow-right-to-bracket"></i>
-    Login Admin
-  </a>
-</div>
+  <div *ngIf="isMenuOpen" class="lg:hidden flex flex-col items-center space-y-4 py-4 bg-white shadow text-lg">
+    <a routerLink="/nosotros" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
+      <i class="fa-solid fa-child-reaching"></i>
+      Nosotros
+    </a>
+    <a routerLink="/contacto" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
+      <i class="fa-regular fa-envelope"></i>
+      Contacto
+    </a>
+    <a routerLink="/eventos" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
+      <i class="fa-solid fa-film"></i>
+      Eventos
+    </a>
+    <a routerLink="/admin" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
+      <i class="fa-regular fa-clipboard"></i>
+      Registro de proyecto
+    </a>
+    <a routerLink="/galeria" (click)="isMenuOpen = false" class="hover:text-blue-600 transition flex items-center gap-2">
+      <i class="fa-solid fa-clipboard-check"></i>
+      Nuestros Proyectos
+    </a>
+    <a routerLink="/log" (click)="isMenuOpen = false"
+      class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition flex items-center gap-2">
+      <i class="fa-solid fa-arrow-right-to-bracket"></i>
+      Login Admin
+    </a>
+  </div>
 
 </div>

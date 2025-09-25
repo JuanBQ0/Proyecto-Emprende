@@ -1,15 +1,16 @@
 <nav-administrativo class="flex mb-14"></nav-administrativo>
 
+<!-- Nuevos eventos, aca estan los registros de los estudiantes, aqui se aprueban o se rechazan los registros -->
 <div class="min-h-screen bg-green-200">
   <div class="p-6 sm:p-6 lg:p-12">
+
     @if (proyectos().length === 0) {
-      <!-- Puedes poner un mensaje aquí si quieres -->
-    } @else {
+      } @else {
       @for (proyecto of proyectos(); track proyecto.id) {
         <div class="bg-white rounded-2xl shadow-md p-4 sm:p-4 mb-5 border border-gray-200">
           <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
 
-            <!-- Info del proyecto -->
+            <!----------------------------------------------------------  Info del proyecto -------------------------------------------------------- -->
             <div>
               <h3 class="text-lg sm:text-xl font-semibold text-gray-800 break-words">
                 {{ proyecto.titulo }}
@@ -22,24 +23,21 @@
               </p>
             </div>
 
-            <!-- Botones -->
+            <!----------------------------------------------------------  Botones -------------------------------------------------------- -->
             <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
               <button
                 class="w-full sm:w-auto bg-green-500 text-white px-4 py-2 rounded-xl hover:bg-green-600 transition"
-                (click)="aprobar(proyecto)"
-              >
+                (click)="aprobar(proyecto)">
                 Aprobar
               </button>
               <button
                 class="w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600 transition"
-                (click)="verDetalles(proyecto)"
-              >
+                (click)="verDetalles(proyecto)">
                 Ver detalles
               </button>
               <button
                 class="w-full sm:w-auto bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600 transition"
-                (click)="EliminarProyecto(proyecto.id)"
-              >
+                (click)="EliminarProyecto(proyecto.id)">
                 Rechazar
               </button>
             </div>
@@ -49,51 +47,47 @@
     }
   </div>
 
-  <!-- Modal -->
+  <!----------------------------------------------------------  Modal -------------------------------------------------------- -->
   @if (proyectoSeleccionado) {
     <div
-      class="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-    >
+      class="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div
-        class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-4 sm:p-6 lg:p-8 relative border border-gray-200 overflow-y-auto max-h-[90vh]"
-      >
-        <!-- Botón cerrar -->
+        class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-4 sm:p-6 lg:p-8 relative border border-gray-200 overflow-y-auto max-h-[90vh]">
+        <!----------------------------------------------------------  Botón cerrar -------------------------------------------------------- -->
         <button
           (click)="cerrarModal()"
           class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl"
-          aria-label="Cerrar modal"
-        >
+          aria-label="Cerrar modal">
           ✖
         </button>
 
-        <!-- Logo -->
+        <!----------------------------------------------------------  Logo -------------------------------------------------------- -->
         @if (proyectoSeleccionado.logo) {
           <div class="flex justify-center mb-6">
             <img
               [src]="proyectoSeleccionado.logo"
               alt="Logo del proyecto"
-              class="h-20 sm:h-28 object-contain rounded-md shadow"
-            />
+              class="h-20 sm:h-28 object-contain rounded-md shadow"/>
           </div>
         }
 
-        <!-- Título -->
+        <!------------------------------------------------------------ Título --------------------------------------------------->
         <h3 class="text-2xl sm:text-3xl font-bold text-green-700 mb-6 text-center">
           Detalles del Proyecto
         </h3>
 
-        <!-- Info general -->
+        <!--------------------------------------------- Info general ----------------------------------------------------------------------->
         <div class="space-y-2 sm:space-y-3 text-gray-700 mb-6 text-sm sm:text-base">
           <p><span class="font-semibold text-green-800">📌 Nombre:</span> {{ proyectoSeleccionado.nombreProyecto }}</p>
           <p><span class="font-semibold text-green-800">🏷️ Categoría:</span> {{ proyectoSeleccionado.categoria }}</p>
           <p><span class="font-semibold text-green-800">📅 Fecha de Registro:</span> {{ proyectoSeleccionado.fecha | date:'medium' }}</p>
         </div>
 
-        <!-- Estudiantes -->
+        <!----------------------------------------------- Estudiantes ---------------------------------------------------------->
         <h4 class="text-lg sm:text-xl font-bold text-green-700 mb-4 border-b pb-2">
           👨‍🎓 Estudiantes Participantes
         </h4>
-
+        <!-- ----------------------------------------------------------------------------------------------------------------------------- -->
         <div class="grid gap-4 max-h-64 overflow-y-auto pr-2">
           @for (estudiante of proyectoSeleccionado.estudiantes; track estudiante) {
             <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 shadow-sm">
@@ -110,6 +104,7 @@
             </div>
           }
         </div>
+        <!-- ----------------------------------------------------------------------------------------------------------------------------- -->
       </div>
     </div>
   }

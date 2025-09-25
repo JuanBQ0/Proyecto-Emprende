@@ -8,13 +8,12 @@
         'opacity-100 z-10 blur-0': i === imagenActual,
         'opacity-0 z-0 blur-md': i !== imagenActual
       }"
-    />
+      />
   }
 
   <!-- Indicadores -->
   <div
-    class="absolute bottom-4  left-1/2 -translate-x-1/2 flex gap-2 z-20"
-  >
+    class="absolute bottom-4  left-1/2 -translate-x-1/2 flex gap-2 z-20">
     @for (image of imagenes; track image; let i = $index) {
       <button
         class="rounded-full transition-all"
@@ -22,8 +21,8 @@
           'bg-green-500 w-6 h-2 md:w-10 md:h-3': i === imagenActual,
           'bg-gray-400 w-4 h-2 md:w-6 md:h-3': i !== imagenActual
         }"
-        (click)="imagenActual = i"
-      ></button>
+        (click)="imagenActual = i">
+      </button>
     }
   </div>
 </div>

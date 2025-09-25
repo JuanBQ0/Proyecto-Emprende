@@ -48,17 +48,12 @@ export class NuevoEventoComponent implements OnInit, OnDestroy {
   }
 
   async subirImagen() {
-  if (!this.archivoSeleccionado) return;
-
-  await this.eventosService.agregarImagen(this.archivoSeleccionado);
-
-  // Limpiar estado
-  this.archivoSeleccionado = null;
-  this.fileInput.nativeElement.value = '';
-
-  // Forzar detección de cambios para que Angular actualice la vista inmediatamente
-  this.cdRef.detectChanges();
-}
+    if (!this.archivoSeleccionado) return;
+    await this.eventosService.agregarImagen(this.archivoSeleccionado);
+    this.archivoSeleccionado = null;
+    this.fileInput.nativeElement.value = '';
+    this.cdRef.detectChanges();
+  }
 
   ampliarImagen(url: string) {
     this.imagenAmpliada = url;
@@ -78,7 +73,7 @@ export class NuevoEventoComponent implements OnInit, OnDestroy {
 
   moverImagenAHistorial(img: string) {
     this.eventosService.moverAHistorial(img);
-    this.imagenParaEliminar = null; // Cierra modal si se usa confirmación
+    this.imagenParaEliminar = null;
   }
 
 }

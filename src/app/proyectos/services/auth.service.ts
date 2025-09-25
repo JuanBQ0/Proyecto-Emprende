@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-private apiUrl = 'https://proyectosgradoapi.onrender.com/api/UsuarioControllerAuth/login'; // Cambia a la URL correcta de tu API
+private apiUrl = 'https://proyectosgradoapi.onrender.com/api/UsuarioControllerAuth/login'; 
 
   constructor(private http: HttpClient) {}
 

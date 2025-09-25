@@ -10,5 +10,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavAdministrativoComponent {
 
-isMenuOpen = false;
+  isMenuOpen = false;
 }

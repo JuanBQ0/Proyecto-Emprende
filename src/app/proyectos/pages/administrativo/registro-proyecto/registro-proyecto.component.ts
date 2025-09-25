@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule,   } from '@angular/forms';
+import { FormsModule, NgForm,   } from '@angular/forms';
 import { Proyecto, TipoParticipante } from '../../../interface/proyecto.interface';
 import { ProyectoServices } from '../../../services/proyectos.services';
 import { CategoriaProyecto } from '../../../interface/categoria-proyecto.enum';
@@ -13,16 +13,16 @@ import { CategoriaProyecto } from '../../../interface/categoria-proyecto.enum';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistroProyectoComponent {
-categorias: string[] = Object.values(CategoriaProyecto);
-TipoParticipante: string[] = Object.values(TipoParticipante);
-registroExitoso: boolean = false;
+  categorias: string[] = Object.values(CategoriaProyecto);
+  TipoParticipante: string[] = Object.values(TipoParticipante);
+  registroExitoso: boolean = false;
 
-generos: string[] = ['Masculino', 'Femenino', 'Otro'];
+  generos: string[] = ['Masculino', 'Femenino', 'Otro'];
 
   constructor(
-  public proyectoService: ProyectoServices,
-  private cdr: ChangeDetectorRef
-) {}
+    public proyectoService: ProyectoServices,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   get proyecto(): Proyecto {
     return this.proyectoService.getProyecto();
@@ -44,16 +44,21 @@ generos: string[] = ['Masculino', 'Femenino', 'Otro'];
     this.proyectoService.eliminarEstudiante(index);
   }
 
-  registrar() {
-  this.proyectoService.registrarProyectoConEstado();
+  registrar(form: NgForm) {
+    if (form.invalid) {
+      Object.values(form.controls).forEach(c => c.markAsTouched());
+      return;
+    }
 
-  this.registroExitoso = true;
+    this.proyectoService.registrarProyectoConEstado();
+    this.registroExitoso = true;
 
-  setTimeout(() => {
-    this.registroExitoso = false;
-    this.cdr.detectChanges();
-  }, 3000);
-}
+    setTimeout(() => {
+      this.registroExitoso = false;
+      this.cdr.detectChanges();
+    }, 3000);
+  }
+
 
 }
 

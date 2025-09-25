@@ -27,23 +27,20 @@ export class GestionProyectosComponent implements OnInit {
   this.proyectos = this.proyectoService.obtenerProyectosAprobados();
   this.proyectosFiltrados = [...this.proyectos];
 }
-
+  // BUSQUEDAS
   buscarPorIdentificacion() {
     const id = this.busquedaIdentificacion.trim();
     if (!id) return;
 
     this.busquedaActiva = true;
 
-    // 🔍 Buscar si el estudiante existe en algún proyecto
     const encontrados = this.proyectos.filter(p =>
       p.estudiantes.some(est => est.identificacion === id)
     );
 
     if (encontrados.length > 0) {
-      // 👥 Muestra el proyecto completo (con todos sus estudiantes)
       this.proyectosFiltrados = encontrados;
-    } else {
-      // 🚫 Si no se encuentra, se muestra vacío
+      } else {
       this.proyectosFiltrados = [];
     }
   }
@@ -53,6 +50,14 @@ export class GestionProyectosComponent implements OnInit {
     this.busquedaActiva = false;
     this.proyectosFiltrados = [...this.proyectos];
   }
+
+  eliminarProyecto(id: string) {
+    if (confirm('¿Seguro que deseas eliminar este proyecto?')) {
+    this.proyectoService.eliminarProyecto(id);
+    this.proyectos = this.proyectoService.obtenerProyectosAprobados();
+    this.proyectosFiltrados = [...this.proyectos];
+  }
+}
 
   trackById(index: number, item: ProyectoRegistrado) {
     return item.id;

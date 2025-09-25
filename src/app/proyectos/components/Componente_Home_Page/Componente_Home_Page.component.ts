@@ -37,11 +37,8 @@ export class ComponenteHomePageComponent {
     }
 
   ];
-
   ringIndexes = Array.from({ length: 10 }, (_, i) => i);
-
   flippedCards: boolean[] = [];
-
   ngOnInit() {
     this.flippedCards = Array(this.personas.length).fill(false);
   }

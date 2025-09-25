@@ -18,14 +18,11 @@ export class AppComponent {
   mostrarElementos = true;
 
   constructor(private router: Router) {
-  this.router.events.subscribe(event => {
-    if (event instanceof NavigationEnd) {
-      const rutasOcultas = ['/nuevos_proyectos','/log','/reporte', '/gestion', '/nuevo_evento','/historial_eventos'];
-      this.mostrarElementos = !rutasOcultas.some(ruta => event.urlAfterRedirects.startsWith(ruta));
-    }
-  });
-}
-
-
-
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const rutasOcultas = ['/nuevos_proyectos','/log','/reporte', '/gestion', '/nuevo_evento','/historial_eventos'];
+        this.mostrarElementos = !rutasOcultas.some(ruta => event.urlAfterRedirects.startsWith(ruta));
+      }
+    });
+  }
 }
