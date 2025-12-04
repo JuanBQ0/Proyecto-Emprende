@@ -1,0 +1,64 @@
+<app-navbar-docente></app-navbar-docente>
+
+<main class="ml-64 min-h-screen bg-green-100 p-6 sm:p-8 md:p-12 lg:p-16">
+
+  <h1 class="text-3xl font-bold mb-8 text-green-800">📊 Panel del Docente</h1>
+
+  <!-- MÉTRICAS RÁPIDAS -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+    <div class="bg-green-100 p-6 rounded-2xl shadow flex flex-col items-center">
+      <p class="text-4xl font-bold text-green-800">{{ activos }}</p>
+      <p class="text-green-700 font-semibold mt-2">Proyectos Activos</p>
+    </div>
+    <div class="bg-yellow-100 p-6 rounded-2xl shadow flex flex-col items-center">
+      <p class="text-4xl font-bold text-yellow-800">{{ inactivos }}</p>
+      <p class="text-yellow-700 font-semibold mt-2">Proyectos Inactivos</p>
+    </div>
+    <div class="bg-blue-100 p-6 rounded-2xl shadow flex flex-col items-center">
+      <p class="text-4xl font-bold text-blue-800">{{ graduados }}</p>
+      <p class="text-blue-700 font-semibold mt-2">Proyectos Graduados</p>
+    </div>
+  </div>
+
+  <!-- ACCESOS RÁPIDOS -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <a routerLink="/docente/seguimientos" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg flex flex-col items-start gap-2 transition-transform hover:scale-[1.02]">
+      <h2 class="text-xl font-semibold">📋 Seguimiento de Proyectos</h2>
+      <p class="text-gray-600 text-sm">Ver y gestionar proyectos asignados.</p>
+    </a>
+    <a routerLink="/docente/informes" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg flex flex-col items-start gap-2 transition-transform hover:scale-[1.02]">
+      <h2 class="text-xl font-semibold">📄 Gestión de Informes</h2>
+      <p class="text-gray-600 text-sm">Subir, descargar y filtrar informes.</p>
+    </a>
+    <a routerLink="/docente/perfil" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg flex flex-col items-start gap-2 transition-transform hover:scale-[1.02]">
+      <h2 class="text-xl font-semibold">👤 Mi Perfil</h2>
+      <p class="text-gray-600 text-sm">Editar información personal.</p>
+    </a>
+  </div>
+
+  <!-- BUSCADOR DE INFORMES -->
+  <div class="bg-white p-6 rounded-2xl shadow mb-8">
+    <h2 class="text-lg font-semibold text-green-800 mb-4">🔍 Buscar Informes</h2>
+    <div class="flex flex-col md:flex-row gap-4">
+      <input type="text" [(ngModel)]="filtroTexto" placeholder="Buscar por nombre o descripción" class="border p-2 rounded flex-1"/>
+      <input type="date" [(ngModel)]="filtroFechaInicio" placeholder="Desde" class="border p-2 rounded"/>
+      <input type="date" [(ngModel)]="filtroFechaFin" placeholder="Hasta" class="border p-2 rounded"/>
+    </div>
+  </div>
+
+  <!-- ÚLTIMOS INFORMES -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let informe of informesFiltrados" class="bg-white p-4 rounded-2xl shadow-md flex flex-col justify-between">
+      <div>
+        <h3 class="font-bold text-green-800">{{ informe.nombre }}</h3>
+        <p class="text-gray-600 text-sm">{{ informe.descripcion }}</p>
+        <p class="text-gray-500 text-xs">Fecha: {{ informe.fecha | date:'dd/MM/yyyy HH:mm' }}</p>
+      </div>
+      <div class="flex gap-2 mt-4">
+        <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">📥 Descargar</button>
+        <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded">✉️ Enviar</button>
+      </div>
+    </div>
+  </div>
+
+</main>

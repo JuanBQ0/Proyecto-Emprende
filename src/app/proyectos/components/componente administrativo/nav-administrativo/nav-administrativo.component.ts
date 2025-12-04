@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'nav-administrativo',
@@ -9,6 +9,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavAdministrativoComponent {
-
+  
+constructor(private router: Router) {}
   isMenuOpen = false;
+  logout() {
+    // Aquí puedes limpiar localStorage o cualquier sesión de docente
+    localStorage.removeItem('usuarioDocente');
+    this.router.navigate(['/log']); // redirige al login
+  }
 }

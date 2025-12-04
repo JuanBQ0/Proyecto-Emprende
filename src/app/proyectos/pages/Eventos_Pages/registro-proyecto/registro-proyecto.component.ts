@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm,   } from '@angular/forms';
 import { Proyecto, TipoParticipante } from '../../../interface/proyecto.interface';
 import { ProyectoServices } from '../../../services/proyectos.services';
-import { CategoriaProyecto } from '../../../interface/categoria-proyecto.enum';
+import { ProgramaAcademico } from '../../../interface/programa-academico.enum';
 
 
 @Component({
@@ -13,7 +13,8 @@ import { CategoriaProyecto } from '../../../interface/categoria-proyecto.enum';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistroProyectoComponent {
-  categorias: string[] = Object.values(CategoriaProyecto);
+
+  programasAcademicos: string[] = Object.values(ProgramaAcademico);
   TipoParticipante: string[] = Object.values(TipoParticipante);
   registroExitoso: boolean = false;
 

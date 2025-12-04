@@ -20,23 +20,5 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit() {
-    if (!this.email.trim() || !this.password.trim()) {
-      alert('Por favor complete todos los campos');
-      return;
-    }
-
-    this.authService.login({ email: this.email, password: this.password }).subscribe({
-      next: (res) => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-          this.router.navigate(['/reporte']);
-        } else {
-          alert('Token no recibido del servidor');
-        }
-      },
-      error: () => alert('Credenciales incorrectas'),
-    });
-  }
 
 }

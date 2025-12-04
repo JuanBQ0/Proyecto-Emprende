@@ -14,8 +14,8 @@ export class NavbarSuperiroComponent {
 
   isMenuOpen = false;
 
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
+toggleMenu() {
+  this.isMenuOpen = !this.isMenuOpen;
+}
 
  }

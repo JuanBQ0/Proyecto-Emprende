@@ -1,7 +1,7 @@
 <div class="flex flex-col md:flex-row min-h-screen bg-cover bg-center" style="background-image: url('image/Decorador/galerias.jpg');">
   <!-- Drawer -->
   <app-draw-galeria
-    class="w-full md:w-[260px] bg-[#828382] p-2 mb-4 md:mb-0 md:mr-6  shadow-md md:shadow-none flex flex-col">
+    class="w-full md:w-[260px] bg-[#828382] p-2 mb-4 md:mb-0 md:mr-6 shadow-md md:shadow-none flex flex-col">
   </app-draw-galeria>
 
   <!-- Contenido principal -->
@@ -9,10 +9,9 @@
     <!-- Título -->
     <div class="md:p-16">
       <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-8 text-center drop-shadow-lg">
-      Proyectos destacados
+        Proyectos destacados
       </h2>
     </div>
-
 
     <!-- Grid de Proyectos -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -26,7 +25,9 @@
           <!-- Información -->
           <div class="p-4 flex flex-col space-y-2 text-center">
             <h3 class="font-semibold text-gray-900">{{ proyecto.nombreProyecto }}</h3>
-            <p class="text-gray-500 italic">{{ proyecto.categoria }}</p>
+            <p class="text-gray-500 italic">
+              {{ proyecto.estudiantes[0].programaAcademico }}
+            </p>
           </div>
         </div>
       }
@@ -60,11 +61,12 @@
         {{ proyectoSeleccionado.nombreProyecto }}
       </h3>
       <p class="text-sm text-gray-500 italic text-center mb-6">
-        {{ proyectoSeleccionado.categoria }}
+        {{ proyectoSeleccionado.estudiantes[0].programaAcademico }}
       </p>
       <p class="text-gray-700 text-center mb-6">
         🌐 {{ proyectoSeleccionado.redesSociales }}
       </p>
+
 
       <!-- Lista de Estudiantes -->
       <div class="mt-6">
@@ -83,7 +85,7 @@
               <p class="font-medium text-gray-900">
                 {{ estudiante.nombres }} {{ estudiante.apellidos }}
               </p>
-              <p class="text-sm text-gray-600">Programa: {{ estudiante.programa }}</p>
+              <p class="text-sm text-gray-600">Programa: {{ estudiante.programaAcademico }}</p>
               <p class="text-sm text-gray-600">Tel: {{ estudiante.tel }}</p>
               <p class="text-sm text-gray-600">Correo: {{ estudiante.correo }}</p>
             </div>

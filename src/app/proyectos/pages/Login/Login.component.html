@@ -23,7 +23,7 @@
           <h1 class="title text-4xl font-bold text-center text-pink-800 mb-2">Unidad de Empremdimiento</h1>
         </div>
 
-        <form class="form grid" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <form class="form grid" #loginForm="ngForm">
       <div class="inputDiv">
         <label for="username" class="username">Usuario</label>
         <div class="w-full">
@@ -53,10 +53,18 @@
           />
         </div>
       </div>
+      <!-- BOTOM DOCENTE, MIENTRAS TANTO -->
+      <button
+          type="button"
+          class="btn flex bg-green-500 text-white justify-center items-center mt-3 hover:bg-green-600 transition"
+          routerLink="/docente/dashboard"
+        >
+          Ingreso Docente
+        </button>
 
       <button type="submit" class="btn flex bg-amber-300">
         <a
-          routerLink="/nuevos_proyectos">
+          routerLink="/admin/nuevos_proyectos">
           Inicio de Sesion
         </a>
       </button>

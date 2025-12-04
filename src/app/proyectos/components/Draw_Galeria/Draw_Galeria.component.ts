@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ProyectoServices } from '../../services/proyectos.services';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLinkActive } from '@angular/router';
-import { CategoriaProyecto } from '../../interface/categoria-proyecto.enum';
+import { ProgramaAcademico } from '../../interface/programa-academico.enum';
+import { ProyectoRegistrado } from '../../interface/proyecto.interface';
 
 @Component({
   selector: 'app-draw-galeria',
@@ -11,27 +11,47 @@ import { CategoriaProyecto } from '../../interface/categoria-proyecto.enum';
   templateUrl: './Draw_Galeria.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class DrawGaleriaComponent {
-  categoriasAbiertas = false;
-  selectedCategoria: string | null = null;
+  programasAbiertos = false;
+  selectedPrograma: ProgramaAcademico | null = null;
 
-  constructor(public proyectoService: ProyectoServices) {}
+  // Lista de todos los proyectos (puedes traerlos de tu servicio)
+  proyectos: ProyectoRegistrado[] = [];
 
-  toggleCategorias() {
-    this.categoriasAbiertas = !this.categoriasAbiertas;
+  constructor(public proyectoService: ProyectoServices) {
+    // Inicializar proyectos desde el servicio
+    this.proyectos = this.proyectoService.obtenerProyectosRegistrados();
   }
 
-  seleccionarCategoria(categoria: string) {
+  toggleProgramas() {
+    this.programasAbiertos = !this.programasAbiertos;
+  }
+
+  seleccionarPrograma(programa: ProgramaAcademico) {
     // Alternar selección
-    if (this.selectedCategoria === categoria) {
-      this.selectedCategoria = null;
+    if (this.selectedPrograma === programa) {
+      this.selectedPrograma = null;
     } else {
-      this.selectedCategoria = categoria;
+      this.selectedPrograma = programa;
     }
 
     // Avisar al servicio
-    this.proyectoService.setCategoriaSeleccionada(this.selectedCategoria as CategoriaProyecto | null);
+    this.proyectoService.setProgramaSeleccionado(this.selectedPrograma);
+  }
+
+  // Proyectos filtrados según el programa seleccionado
+  get proyectosFiltrados(): ProyectoRegistrado[] {
+    if (!this.selectedPrograma) return this.proyectos;
+
+    return this.proyectos.filter(proyecto =>
+      proyecto.estudiantes.some(est => est.programaAcademico === this.selectedPrograma)
+    );
+  }
+
+  // Función para eliminar proyecto
+  eliminarProyecto(id: string) {
+    this.proyectoService.eliminarProyecto(id);
+    this.proyectos = this.proyectoService.obtenerProyectosRegistrados(); // actualizar lista
   }
 }
-
-

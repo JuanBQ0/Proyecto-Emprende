@@ -3,6 +3,7 @@ import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/rout
 import { FooterComponent } from "./proyectos/components/footer/footer.component";
 import { NavbarSuperiroComponent } from "./proyectos/components/navbar-superiro/navbar-superiro.component";
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs';
 
 
 @Component({
@@ -14,15 +15,21 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'Emprende';
-
   mostrarElementos = true;
 
   constructor(private router: Router) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        const rutasOcultas = ['/nuevos_proyectos','/log','/reporte', '/gestion', '/nuevo_evento','/historial_eventos'];
-        this.mostrarElementos = !rutasOcultas.some(ruta => event.urlAfterRedirects.startsWith(ruta));
-      }
-    });
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        const rutasOcultas = [
+          '/docente',
+          '/admin' // 👈 se agrega el módulo docente completo
+        ];
+
+        // Oculta navbar/footer si alguna ruta oculta coincide o empieza con la actual
+        this.mostrarElementos = !rutasOcultas.some(ruta =>
+          event.urlAfterRedirects.startsWith(ruta)
+        );
+      });
   }
 }

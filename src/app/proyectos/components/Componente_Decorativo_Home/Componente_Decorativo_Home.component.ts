@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { CarruselComponent } from "../Carrusel/Carrusel.component";
-import { ComponenteHomePageComponent } from "../Componente_Home_Page/Componente_Home_Page.component";
+import { ComponenteHomePageComponent } from "../Componente_Nosotros/Componente_Home_Page.component";
 
 @Component({
   selector: 'app-componente-decorativo-home',

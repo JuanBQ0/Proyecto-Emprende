@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ProyectoServices } from '../../../services/proyectos.services';
 import { DrawGaleriaComponent } from "../../../components/Draw_Galeria/Draw_Galeria.component";
 import { ProyectoRegistrado } from '../../../interface/proyecto.interface';
-import { CategoriaProyecto } from '../../../interface/categoria-proyecto.enum';
+import { ProgramaAcademico } from '../../../interface/programa-academico.enum';
 
 @Component({
   selector: 'app-galeria-proyectos',
@@ -15,34 +15,41 @@ import { CategoriaProyecto } from '../../../interface/categoria-proyecto.enum';
 })
 
 export class GaleriaProyectosComponent implements OnInit {
-  
+
   proyectos: ProyectoRegistrado[] = [];
   proyectosFiltrados: ProyectoRegistrado[] = [];
   proyectoSeleccionado: ProyectoRegistrado | null = null;
-  categorias: CategoriaProyecto[] = [];
-  selectedCategoria: CategoriaProyecto | null = null;
+
+  programas: ProgramaAcademico[] = [];
+  selectedPrograma: ProgramaAcademico | null = null;
 
   constructor(private proyectoService: ProyectoServices) {}
 
   ngOnInit(): void {
-    // Cargar aprobados
+    // Cargar proyectos aprobados
     this.proyectos = this.proyectoService.obtenerProyectosAprobados();
     this.proyectosFiltrados = [...this.proyectos];
-    this.categorias = this.proyectoService.categorias;
 
-    // Escuchar cambios de categoría
-    this.proyectoService.categoriaSeleccionada$.subscribe(categoria => {
-      this.selectedCategoria = categoria;
-      if (categoria) {
-        this.proyectosFiltrados = this.proyectos.filter(p => p.categoria === categoria);
+    // Cargar programas desde el servicio
+    this.programas = this.proyectoService.programas;
+
+    // Escuchar cambios de programa seleccionado
+    this.proyectoService.programaSeleccionado$.subscribe(programa => {
+      this.selectedPrograma = programa;
+
+      if (programa) {
+        // Filtrar proyectos que tengan al menos un estudiante con el programa seleccionado
+        this.proyectosFiltrados = this.proyectos.filter(p =>
+          p.estudiantes.some(est => est.programaAcademico === programa)
+        );
       } else {
         this.proyectosFiltrados = [...this.proyectos];
       }
     });
   }
 
-  seleccionarCategoria(categoria: CategoriaProyecto) {
-    this.proyectoService.setCategoriaSeleccionada(categoria);
+  seleccionarPrograma(programa: ProgramaAcademico) {
+    this.proyectoService.setProgramaSeleccionado(programa);
   }
 
   abrirModal(proyecto: ProyectoRegistrado) {

@@ -1,0 +1,86 @@
+<app-navbar-docente></app-navbar-docente>
+
+<main class="ml-64 min-h-screen bg-green-100 p-6 sm:p-8 md:p-12 lg:p-16">
+
+  <h1 class="text-3xl font-bold mb-8 text-green-800">📄 Gestión de Informes</h1>
+
+  <!-- Pestañas -->
+  <div class="mb-6 border-b border-green-300">
+    <nav class="flex space-x-4">
+      <button
+        (click)="tab = 'docente'"
+        [ngClass]="tab === 'docente' ? 'border-b-4 border-green-700 text-green-800' : 'text-gray-700 hover:text-green-800'"
+        class="px-4 py-2 font-semibold transition-colors"
+      >
+        Informe Docente
+      </button>
+
+      <button
+        (click)="tab = 'trimestral'"
+        [ngClass]="tab === 'trimestral' ? 'border-b-4 border-green-700 text-green-800' : 'text-gray-700 hover:text-green-800'"
+        class="px-4 py-2 font-semibold transition-colors"
+      >
+        Informes Trimestrales
+      </button>
+    </nav>
+  </div>
+
+  <!-- Panel de instrucción y filtro de fechas -->
+<div class="bg-white border border-gray-300 rounded-lg p-4 mb-6 shadow-sm">
+  <div class="flex items-center gap-2 mb-2">
+    <span class="text-green-700 text-lg">📌</span>
+    <p class="text-gray-700 font-semibold">
+      Filtra los informes por fecha. Selecciona un rango para mostrar solo los informes dentro de ese período.
+    </p>
+  </div>
+
+  <div class="flex gap-4 mt-2">
+    <div class="flex flex-col">
+      <label class="text-gray-600 text-sm mb-1">Desde</label>
+      <input type="date" [(ngModel)]="filtroInicio" class="border p-2 rounded"/>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-gray-600 text-sm mb-1">Hasta</label>
+      <input type="date" [(ngModel)]="filtroFin" class="border p-2 rounded"/>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- Formularios subida -->
+  <form *ngIf="tab === 'docente'" (submit)="subirInformeDocente()" class="bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 mb-6">
+    <h2 class="text-xl font-semibold text-green-700">Subir Informe Docente</h2>
+    <input type="file" accept=".pdf" (change)="onArchivoDocenteSeleccionado($event)" class="border p-2 rounded"/>
+    <input type="text" [(ngModel)]="descripcionDocente" placeholder="Descripción breve" name="descDocente" class="border p-2 rounded"/>
+
+    <button type="submit" class="bg-green-700 hover:bg-green-800 text-white py-2 rounded-md font-semibold">Subir Informe</button>
+  </form>
+
+  <form *ngIf="tab === 'trimestral'" (submit)="subirInformeTrimestral()" class="bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 mb-6">
+    <h2 class="text-xl font-semibold text-green-700">Subir Informe Trimestral</h2>
+    <input type="file" accept=".pdf" (change)="onArchivoTrimestralSeleccionado($event)" class="border p-2 rounded"/>
+    <input type="text" [(ngModel)]="descripcionTrimestral" placeholder="Descripción breve" name="descTrimestral" class="border p-2 rounded"/>
+    <button type="submit" class="bg-green-700 hover:bg-green-800 text-white py-2 rounded-md font-semibold">Subir Informe</button>
+  </form>
+
+  <!-- Lista filtrada -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let informe of informesFiltrados; let i = index" class="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+      <div>
+        <h3 class="font-bold text-green-800">{{ informe.nombre }}</h3>
+        <p class="text-gray-600 text-sm">{{ informe.descripcion }}</p>
+        <p class="text-gray-500 text-xs">Fecha: {{ informe.fecha | date:'dd/MM/yyyy' }}</p>
+      </div>
+      <div class="flex gap-2 mt-4">
+        <button (click)="descargarInforme(informe)" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">📥 Descargar</button>
+        <button (click)="enviarCorreoInforme(informe)" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded">✉️ Enviar</button>
+        <button (click)="eliminarInforme(informe)" class="ml-auto text-red-600 hover:text-red-800 font-bold">❌</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="informesFiltrados.length === 0" class="text-gray-600 mt-4">No hay informes cargados.</div>
+
+</main>

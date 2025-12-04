@@ -1,15 +1,15 @@
-<!-- Filtro por categorias -->
+<!-- Filtro por programas académicos -->
 <div class="w-full md:w-[260px] text-slate-300 h-screen overflow-y-auto px-8 py-20">
-  <h3 class="text-white font-bold text-lg mb-4 p-2">Categorías de Emprendimientos</h3>
+  <h3 class="text-white font-bold text-lg mb-4 p-2">Programas Académicos</h3>
   <nav class="space-y-2">
-    @for (categoria of proyectoService.categorias; track categoria) {
+    @for (programa of proyectoService.programas; track programa) {
       <a
         class="relative flex items-center px-3 py-2 rounded cursor-pointer border-b border-gray-700 last:border-0 font-medium
                hover:bg-[#232523] hover:text-white transition-colors"
-        [class.bg-[#232523]]="selectedCategoria === categoria"
-        [class.text-white]="selectedCategoria === categoria"
-        (click)="seleccionarCategoria(categoria)">
-        {{ categoria }}
+        [class.bg-[#232523]]="selectedPrograma === programa"
+        [class.text-white]="selectedPrograma === programa"
+        (click)="seleccionarPrograma(programa)">
+        {{ programa }}
       </a>
     }
   </nav>

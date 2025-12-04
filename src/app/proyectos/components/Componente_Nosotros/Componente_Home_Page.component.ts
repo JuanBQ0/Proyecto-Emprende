@@ -22,8 +22,8 @@ export class ComponenteHomePageComponent {
       features: ['Liderazgo', 'Gestión Estratégica', 'Toma de decisiones', 'Innovación']
     },
     {
-      foto: 'image/empleados/Yiris_Sierra.jpg',
-      title: 'YIRIS SIERRA',
+      foto: '',
+      title: '',
       subtitle: 'SECRETARIA',
       description: 'Secretaria de la unidad de emprendimiento de la Univercidad Popular del Cesar',
       features: ['Organización', 'Comunicación efectiva', 'Gestión Documental', 'Atención al usuario']

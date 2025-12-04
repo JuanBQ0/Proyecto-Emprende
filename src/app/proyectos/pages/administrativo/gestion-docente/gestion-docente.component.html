@@ -1,0 +1,130 @@
+<nav-administrativo></nav-administrativo>
+
+<!-- ✅ CONTENEDOR PRINCIPAL -->
+<div class="ml-64 min-h-screen bg-green-100 flex flex-col items-center p-12">
+
+  <div class="w-full max-w-4xl bg-white rounded-2xl shadow-lg p-6">
+
+    <!-- 🧑‍🏫 Título -->
+    <h2 class="text-2xl font-bold text-center text-green-700 mb-6">
+      Gestión de Docentes
+    </h2>
+
+    <!-- 📝 Formulario -->
+    <form (ngSubmit)="agregarDocente()" class="grid gap-4 md:grid-cols-2">
+
+      <div>
+        <label class="block text-gray-700 text-sm font-medium mb-1">Nombre completo</label>
+        <input
+          [(ngModel)]="nuevoDocente.nombre"
+          name="nombre"
+          required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
+          placeholder="Ej: María Rodríguez"
+        />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 text-sm font-medium mb-1">Correo electrónico</label>
+        <input
+          [(ngModel)]="nuevoDocente.correo"
+          name="correo"
+          type="email"
+          required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
+          placeholder="Ej: maria@universidad.edu"
+        />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 text-sm font-medium mb-1">Identificación</label>
+        <input
+          [(ngModel)]="nuevoDocente.identificacion"
+          name="identificacion"
+          required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
+          placeholder="Ej: 1023456789"
+        />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 text-sm font-medium mb-1">Contraseña</label>
+        <input
+          [(ngModel)]="nuevoDocente.password"
+          name="password"
+          type="password"
+          required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
+          placeholder="Contraseña"
+        />
+      </div>
+
+      <div class="md:col-span-2 flex justify-center mt-4">
+        <button
+          type="submit"
+          class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded-lg transition-all shadow-md"
+        >
+          Agregar Docente
+        </button>
+      </div>
+
+    </form>
+
+
+    <!-- 📋 LISTA -->
+    <div class="mt-10">
+
+      <h3 class="text-lg font-semibold text-gray-700 mb-3">
+        Docentes registrados
+      </h3>
+
+      @if (docentes.length === 0) {
+
+        <p class="text-gray-500 text-center py-4">
+          No hay docentes registrados aún.
+        </p>
+
+      } @else {
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+
+            <thead>
+              <tr class="bg-green-600 text-white">
+                <th class="p-3 rounded-tl-lg">Nombre</th>
+                <th class="p-3">Correo</th>
+                <th class="p-3">Identificación</th>
+                <th class="p-3 text-center rounded-tr-lg">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (docente of docentes; track docente.identificacion) {
+
+                <tr class="border-b hover:bg-green-50 transition">
+                  <td class="p-3">{{ docente.nombre }}</td>
+                  <td class="p-3">{{ docente.correo }}</td>
+                  <td class="p-3">{{ docente.identificacion }}</td>
+                  <td class="p-3 text-center">
+                    <button
+                      (click)="eliminarDocente(docente.identificacion)"
+                      class="text-red-600 hover:text-red-800 font-semibold transition"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+
+              }
+            </tbody>
+
+          </table>
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</div>

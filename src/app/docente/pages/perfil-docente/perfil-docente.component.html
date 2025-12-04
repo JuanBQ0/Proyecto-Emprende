@@ -1,0 +1,75 @@
+<app-navbar-docente></app-navbar-docente>
+
+<main class="ml-64 min-h-screen bg-green-100 px-4 sm:px-8 md:px-12 lg:px-16 py-6">
+
+  <!-- PERFIL DOCENTE -->
+  <div class="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto space-y-6">
+
+    <!-- HEADER -->
+    <div class="flex flex-col md:flex-row items-center gap-6 border-b pb-6">
+
+      <!-- Avatar -->
+      <div class="w-28 h-28 rounded-full bg-green-600 flex items-center justify-center text-white text-4xl font-bold">
+        {{ docente.nombre[0] + docente.apellido[0] }}
+      </div>
+
+      <!-- Datos principales -->
+      <div class="flex-1 text-center md:text-left">
+        <h2 class="text-2xl font-bold text-green-800">{{ docente.nombre }} {{ docente.apellido }}</h2>
+        <p class="text-gray-600 mt-2">📄 Cédula: {{ docente.cedula }}</p>
+        <p class="text-gray-600">✉️ Correo: {{ docente.correo }}</p>
+        <p class="text-gray-600">📞 Teléfono: {{ docente.telefono }}</p>
+        <p class="mt-2 px-3 py-1 inline-block rounded-full text-xs font-semibold"
+           [ngClass]="{
+              'bg-green-200 text-green-800': docente.activo,
+              'bg-red-200 text-red-800': !docente.activo
+           }">
+          {{ docente.activo ? 'Activo' : 'Inactivo' }}
+        </p>
+      </div>
+    </div>
+
+    <!-- DESCRIPCIÓN PROFESIONAL -->
+    <div class="space-y-2">
+      <h3 class="text-xl font-semibold text-green-800 border-b pb-2">👨‍🏫 Descripción Profesional</h3>
+      <p class="text-gray-700">
+        {{ docente.descripcion }}
+      </p>
+    </div>
+
+    <!-- ÁREAS DE INTERÉS -->
+    <div class="space-y-2">
+      <h3 class="text-xl font-semibold text-green-800 border-b pb-2">📌 Áreas de Interés</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li *ngFor="let area of docente.areasInteres">{{ area }}</li>
+      </ul>
+    </div>
+
+    <!-- EXPERIENCIA -->
+    <div class="space-y-2">
+      <h3 class="text-xl font-semibold text-green-800 border-b pb-2">💼 Experiencia Profesional</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li *ngFor="let exp of docente.experiencia">{{ exp }}</li>
+      </ul>
+    </div>
+
+    <!-- ASIGNATURAS / TALLERES -->
+    <div class="space-y-2">
+      <h3 class="text-xl font-semibold text-green-800 border-b pb-2">📚 Asignaturas / Talleres</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li *ngFor="let materia of docente.asignaturas">{{ materia }}</li>
+      </ul>
+    </div>
+
+    <!-- CONTACTO ACADÉMICO -->
+    <div class="space-y-2">
+      <h3 class="text-xl font-semibold text-green-800 border-b pb-2">🌐 Contacto Académico</h3>
+      <p class="text-gray-700">Correo institucional: {{ docente.correo }}</p>
+      <p class="text-gray-700">Teléfono: {{ docente.telefono }}</p>
+      <p class="text-gray-700">LinkedIn: <a href="{{ docente.linkedin }}" target="_blank" class="text-blue-600 underline">{{ docente.linkedin }}</a></p>
+      <p class="text-gray-700">ResearchGate: <a href="{{ docente.researchgate }}" target="_blank" class="text-blue-600 underline">{{ docente.researchgate }}</a></p>
+    </div>
+
+  </div>
+
+</main>
