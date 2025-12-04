@@ -250,5 +250,23 @@ eliminarObservacion(proyectoId: string, texto: string) {
     JSON.stringify(proyectos)
   );
 }
+actualizarProyecto(proyectoActualizado: ProyectoRegistrado) {
+
+  const proyectos = this.obtenerProyectosAprobados();
+
+  const index = proyectos.findIndex(p =>
+    p.id === proyectoActualizado.id
+  );
+
+  if (index !== -1) {
+    proyectos[index] = proyectoActualizado;
+    localStorage.setItem(
+      'proyectosAprobados',
+      JSON.stringify(proyectos)
+    );
+  }
+}
+
+
 
 }

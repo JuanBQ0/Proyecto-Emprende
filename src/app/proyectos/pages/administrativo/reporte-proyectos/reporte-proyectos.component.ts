@@ -106,7 +106,7 @@ export class ReporteProyectosComponent implements OnInit {
         }
       }
 
-      // ───────────────────────────────
+            // ───────────────────────────────
       // ESTUDIANTES
       // ───────────────────────────────
       for (const est of proyecto.estudiantes) {
@@ -119,27 +119,27 @@ export class ReporteProyectosComponent implements OnInit {
             (this.proyectosPorPrograma[prog] || 0) + 1;
         }
 
-        // UPC
-        if (est.EstudianteUPC) {
-          this.totalUPCistas++;
-        }
-
         // Tipo de participante
-          if (est.tipoParticipante) {
+        if (est.tipoParticipante) {
 
-            this.participantesPorTipo[est.tipoParticipante] =
-              (this.participantesPorTipo[est.tipoParticipante] || 0) + 1;
+          this.participantesPorTipo[est.tipoParticipante] =
+            (this.participantesPorTipo[est.tipoParticipante] || 0) + 1;
 
-            if (est.tipoParticipante === TipoParticipante.EgresadoEmprendedor) {
-              this.totalEgresados++;
-            }
-
-            if (est.tipoParticipante === TipoParticipante.MicroempresarioExterno) {
-              this.totalExternos++;
-            }
+          if (est.tipoParticipante === TipoParticipante.EstudianteEmprendedor) {
+            this.totalUPCistas++;
           }
 
+          if (est.tipoParticipante === TipoParticipante.EgresadoEmprendedor) {
+            this.totalEgresados++;
+          }
+
+          if (est.tipoParticipante === TipoParticipante.MicroempresarioExterno) {
+            this.totalExternos++;
+          }
+        }
+
       }
+
     }
 
     this.totalDocentes = docentesUnicos.size;

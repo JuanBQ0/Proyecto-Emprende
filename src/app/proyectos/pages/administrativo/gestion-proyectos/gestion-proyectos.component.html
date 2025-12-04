@@ -181,7 +181,8 @@
               <th class="p-3 border w-32">Identificación</th>
               <th class="p-3 border w-24">UPC</th>
               <th class="p-3 border w-32">Tipo</th>
-              <th class="p-3 border w-20 text-center">Acción</th>
+              <th class="p-3 border w-36 text-center">Acciones</th>
+
             </tr>
           </thead>
 
@@ -227,13 +228,19 @@
 
                   @if (j === 0) {
                     <td class="p-3 border text-center" [attr.rowspan]="item.estudiantes.length">
-                      <button
-                        (click)="eliminarProyecto(item.id)"
-                        class="text-red-600 hover:text-red-800 font-bold"
-                      >
-                        ✖
-                      </button>
-                    </td>
+                    <button
+                      (click)="editarProyecto(item)"
+                      class="text-blue-600 hover:text-blue-800 font-bold mr-2">
+                      ✏️
+                    </button>
+
+                    <button
+                      (click)="eliminarProyecto(item.id)"
+                      class="text-red-600 hover:text-red-800 font-bold">
+                      ✖
+                    </button>
+
+                  </td>
                   }
 
                 </tr>
@@ -252,3 +259,119 @@
   </div>
 
 </div>
+
+@if (proyectoEnEdicion) {
+
+<div class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+  <div class="bg-white p-6 rounded-xl w-full max-w-xl space-y-4">
+
+    <h3 class="text-2xl font-bold text-green-800">✏️ Editar Proyecto</h3>
+
+    <!-- NOMBRE DEL PROYECTO -->
+    <div>
+      <label class="block text-sm font-medium">Nombre del proyecto</label>
+      <input
+        [(ngModel)]="proyectoEnEdicion.nombreProyecto"
+        class="w-full border p-2 rounded"
+        placeholder="Nombre del proyecto"
+      />
+    </div>
+
+    <h4 class="font-semibold text-green-700 mt-2">Estudiantes</h4>
+
+    @for (est of proyectoEnEdicion.estudiantes; track est.identificacion) {
+
+      <div class="border p-3 rounded bg-green-50 space-y-3">
+
+        <!-- NOMBRE -->
+        <div>
+          <label class="block text-sm font-medium">Nombre(s)</label>
+          <input
+            [(ngModel)]="est.nombres"
+            class="w-full border p-2 rounded"
+            placeholder="Nombre del estudiante"
+          />
+        </div>
+
+        <!-- APELLIDO -->
+        <div>
+          <label class="block text-sm font-medium">Apellido(s)</label>
+          <input
+            [(ngModel)]="est.apellidos"
+            class="w-full border p-2 rounded"
+            placeholder="Apellido del estudiante"
+          />
+        </div>
+
+        <!-- PROGRAMA -->
+        <div>
+          <label class="block text-sm font-medium">Programa académico</label>
+          <select
+            [(ngModel)]="est.programaAcademico"
+            class="w-full border p-2 rounded"
+          >
+            <option value="" disabled>Selecciona un programa</option>
+            @for (p of programas; track p) {
+              <option [value]="p">{{ p }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- CORREO -->
+        <div>
+          <label class="block text-sm font-medium">Correo</label>
+          <input
+            [(ngModel)]="est.correo"
+            type="email"
+            class="w-full border p-2 rounded"
+            placeholder="correo@ejemplo.com"
+          />
+        </div>
+
+        <!-- CELULAR -->
+        <div>
+          <label class="block text-sm font-medium">Celular</label>
+          <input
+            [(ngModel)]="est.tel"
+            class="w-full border p-2 rounded"
+            placeholder="3100000000"
+            pattern="^[0-9]{7,15}$"
+          />
+        </div>
+
+        <!-- IDENTIFICACIÓN -->
+        <div>
+          <label class="block text-sm font-medium">Identificación</label>
+          <input
+            [(ngModel)]="est.identificacion"
+            class="w-full border p-2 rounded"
+          />
+        </div>
+
+      </div>
+    }
+
+    <!-- BOTONES -->
+    <div class="flex justify-end gap-3 pt-4">
+
+      <button
+        class="px-4 py-2 rounded bg-gray-400 text-white"
+        (click)="cancelarEdicion()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        class="px-4 py-2 rounded bg-green-700 text-white hover:bg-green-800"
+        (click)="guardarCambios()"
+      >
+        Guardar cambios
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+}

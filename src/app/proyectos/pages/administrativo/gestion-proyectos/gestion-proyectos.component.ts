@@ -5,6 +5,7 @@ import { ProyectoRegistrado } from '../../../interface/proyecto.interface';
 import { CommonModule, DatePipe } from '@angular/common';
 import { DrawGaleriaComponent } from "../../../components/Draw_Galeria/Draw_Galeria.component";
 import { FormsModule } from '@angular/forms';
+import { ProgramaAcademico } from '../../../interface/programa-academico.enum';
 
 @Component({
   selector: 'app-gestion-proyectos',
@@ -15,87 +16,130 @@ import { FormsModule } from '@angular/forms';
 })
 export class GestionProyectosComponent implements OnInit {
 
-constructor(private proyectoService: ProyectoServices) {}
+  constructor(
+    private proyectoService: ProyectoServices
+  ) {}
 
   ngOnInit(): void {
-  this.proyectos = this.proyectoService.obtenerProyectosAprobados();
-  this.aplicarFiltros();
-}
+    this.proyectos = this.proyectoService.obtenerProyectosAprobados();
+    this.aplicarFiltros();
+  }
 
+  // ─────────────
+  // MODAL EDICIÓN
+  // ─────────────
+  proyectoEnEdicion: ProyectoRegistrado | null = null;
+
+  // ─────────────
+  // DATOS
+  // ─────────────
   proyectos: ProyectoRegistrado[] = [];
-  mostrarFiltros: any;
   proyectosFiltrados: ProyectoRegistrado[] = [];
+
+  programas = Object.values(ProgramaAcademico);
+
+  // ─────────────
+  // BUSQUEDA
+  // ─────────────
   busquedaIdentificacion: string = '';
   busquedaActiva: boolean = false;
 
+  // ─────────────
+  // FILTROS
+  // ─────────────
+  filtroEstado: 'Todos' | 'Activo' | 'Inactivo' | 'Graduado' = 'Todos';
+  filtroTipo: 'Todos' | 'Externos' = 'Todos';
 
-// Filtros
-filtroEstado: 'Todos' | 'Activo' | 'Inactivo' | 'Graduado' = 'Todos';
-filtroTipo: 'Todos' | 'Externos' = 'Todos';
-
-  // BUSQUEDAS
+  // ─────────────
+  // FILTROS + BÚSQUEDA
+  // ─────────────
   aplicarFiltros() {
 
-  let lista = [...this.proyectos];
+    let lista = [...this.proyectos];
 
-  // 🔍 Búsqueda por cédula
-  const id = this.busquedaIdentificacion.trim();
+    // 🔍 Buscar por identificación
+    const id = this.busquedaIdentificacion.trim();
 
-  if (id !== '') {
-    lista = lista.filter(p =>
-      p.estudiantes.some(e =>
-        e.identificacion.includes(id)
-      )
-    );
+    if (id !== '') {
+      lista = lista.filter(p =>
+        p.estudiantes.some(e =>
+          e.identificacion.includes(id)
+        )
+      );
 
-    this.busquedaActiva = true;
-  } else {
-    this.busquedaActiva = false;
+      this.busquedaActiva = true;
+    } else {
+      this.busquedaActiva = false;
+    }
+
+    // ✅ Filtrar por estado
+    if (this.filtroEstado !== 'Todos') {
+      lista = lista.filter(p =>
+        p.estadoSeguimiento === this.filtroEstado
+      );
+    }
+
+    // ✅ Filtrar externos
+    if (this.filtroTipo === 'Externos') {
+      lista = lista.filter(p =>
+        p.estudiantes.some(e =>
+          e.tipoParticipante === 'Microempresario externo'
+        )
+      );
+    }
+
+    this.proyectosFiltrados = lista;
   }
 
-  // ✅ Filtro por estado
-  if (this.filtroEstado !== 'Todos') {
-    lista = lista.filter(p =>
-      p.estadoSeguimiento === this.filtroEstado
-    );
+  // ─────────────
+  // MODAL
+  // ─────────────
+  abrirEdicion(proyecto: ProyectoRegistrado) {
+    this.proyectoEnEdicion = JSON.parse(JSON.stringify(proyecto));
   }
 
-  // ✅ Filtro tipo externo
-  if (this.filtroTipo === 'Externos') {
-    lista = lista.filter(p =>
-      p.estudiantes.some(e =>
-        e.tipoParticipante === 'Microempresario externo'
-      )
-    );
+  guardarCambios() {
+
+    if (!this.proyectoEnEdicion) return;
+
+    this.proyectoService.actualizarProyecto(this.proyectoEnEdicion);
+
+    this.proyectos = this.proyectoService.obtenerProyectosAprobados();
+    this.aplicarFiltros();
+
+    this.proyectoEnEdicion = null;
   }
 
-  this.proyectosFiltrados = lista;
-}
+  cancelarEdicion() {
+    this.proyectoEnEdicion = null;
+  }
 
-buscarPorIdentificacion() {
-  this.aplicarFiltros();
-}
-
-  limpiarBusqueda() {
-  this.busquedaIdentificacion = '';
-  this.filtroEstado = 'Todos';
-  this.filtroTipo = 'Todos';
-  this.busquedaActiva = false;
-  this.aplicarFiltros();
-}
-
-
+  // ─────────────
+  // ELIMINAR
+  // ─────────────
   eliminarProyecto(id: string) {
-    if (confirm('¿Seguro que deseas eliminar este proyecto?')) {
+
+    if (!confirm('¿Seguro que deseas eliminar este proyecto?')) return;
+
     this.proyectoService.eliminarProyecto(id);
     this.proyectos = this.proyectoService.obtenerProyectosAprobados();
-    this.proyectosFiltrados = [...this.proyectos];
+    this.aplicarFiltros();
   }
+
+  // ─────────────
+  // LIMPIAR FILTROS
+  // ─────────────
+  limpiarBusqueda() {
+
+    this.busquedaIdentificacion = '';
+    this.filtroEstado = 'Todos';
+    this.filtroTipo = 'Todos';
+    this.busquedaActiva = false;
+
+    this.aplicarFiltros();
+  }
+  editarProyecto(proyecto: ProyectoRegistrado) {
+  this.proyectoEnEdicion = JSON.parse(JSON.stringify(proyecto));
 }
-
-  trackById(index: number, item: ProyectoRegistrado) {
-    return item.id;
-  }
-
 
 }
