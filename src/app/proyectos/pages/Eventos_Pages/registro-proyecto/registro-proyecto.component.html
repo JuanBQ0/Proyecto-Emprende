@@ -1,282 +1,253 @@
-<!-- Fondo general estilo Prosperidad Social -->
-<div class="min-h-screen pt-24 pb-10 px-4
-         bg-[url('/image/Decorador/fondoregistro.jpg')]
-         bg-cover bg-center bg-no-repeat relative">
+<div class="bg-[#f3ebe7] p-6 sm:p-30">
+  <div class="max-w-6xl mx-auto p-6 sm:p-10 bg-white rounded-xl shadow-lg border border-gray-200">
 
-  <!-- Tarjeta principal -->
-  <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden border border-gray-300">
+    <!-- Título -->
+    <h2 class="mt-14 sm:mt-12 text-2xl sm:text-3xl font-bold text-green-800 mb-6 border-b-4 border-yellow-400 pb-2 text-center sm:text-left">
+      Registrar Proyecto
+    </h2>
 
-    <!-- Header institucional -->
-    <div class="bg-[#8b5a2b] px-6 sm:px-10 py-10 text-white">
-      <h1 class="text-2xl sm:text-3xl font-semibold mb-4">
-        Registro de Proyectos de Emprendimiento
-      </h1>
+    <form class="space-y-6" #form="ngForm" (ngSubmit)="registrar(form)" novalidate>
+      <!-- Nombre Proyecto-->
+      <div>
+        <label class="block font-semibold mb-1 text-gray-800">Nombre del Proyecto</label>
+        <input
+          type="text"
+          name="nombreProyecto"
+          [(ngModel)]="proyecto.nombreProyecto"
+          required
+          minlength="3"
+          pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"
+          #nombreCtrl="ngModel"
+          placeholder="Ej: Sistema de riego automatizado"
+          class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"/>
 
-      <p class="text-sm sm:text-base leading-relaxed">
-        Este formulario permite registrar proyectos de emprendimiento desarrollados
-        por estudiantes y participantes de la Universidad Popular del Cesar.
-      </p>
+        <div *ngIf="nombreCtrl.invalid && (nombreCtrl.touched || form.submitted)" class="text-red-500 text-sm mt-1">
+          <div *ngIf="nombreCtrl.errors?.['required']">El nombre es obligatorio.</div>
+          <div *ngIf="nombreCtrl.errors?.['minlength']">Debe tener al menos 3 caracteres.</div>
+          <div *ngIf="nombreCtrl.errors?.['pattern']">Solo se permiten letras.</div>
+        </div>
+      </div>
 
-      <p class="text-xs mt-4 italic opacity-90">
-        La información suministrada será tratada conforme a la Ley 1581 de 2012 y el
-        Decreto 1377 de 2013.
-      </p>
-    </div>
 
-    <!-- Contenido del formulario -->
-    <div class="px-6 sm:px-10 py-10">
+      <!-- Sección Datos Personales -->
+      <label class="block text-xl font-extrabold text-green-800 mb-4 border-b-2 border-yellow-400 pb-2">
+        Datos Personales
+      </label>
 
-      <!-- Título -->
-      <h2 class="text-xl font-semibold text-gray-800 mb-8 border-b pb-3">
-        Información General del Proyecto
-      </h2>
+      <!-- Estudiantes -->
+      @for (estudiante of proyecto.estudiantes; track estudiante; let i = $index) {
+      <div class="border p-6 mb-6 rounded-xl shadow bg-white">
+        <h3 class="text-lg font-semibold text-green-700 mb-4">
+          Emprendedor {{ i + 1 }}
+        </h3>
 
-      <!-- FORMULARIO ORIGINAL (NO SE TOCA LA LÓGICA) -->
-      <form class="space-y-6" #form="ngForm" (ngSubmit)="registrar(form)" novalidate>
-
-        <!-- Nombre Proyecto -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Nombre -->
         <div>
-          <label class="block font-medium mb-1 text-gray-700">
-            Nombre del Proyecto <span class="text-red-500">*</span>
-          </label>
-
+          <label class="block text-sm font-medium text-gray-700 mb-1">Nombres</label>
           <input
             type="text"
-            name="nombreProyecto"
-            [(ngModel)]="proyecto.nombreProyecto"
+            [(ngModel)]="estudiante.nombres"
+            name="nombres{{i}}"
             required
-            minlength="3"
+            minlength="2"
             pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"
-            #nombreCtrl="ngModel"
-            placeholder="Ej: Sistema de riego automatizado"
-            class="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8b5a2b]" />
-
-          <div *ngIf="nombreCtrl.invalid && (nombreCtrl.touched || form.submitted)"
-               class="text-red-600 text-sm mt-1">
-            <div *ngIf="nombreCtrl.errors?.['required']">El nombre es obligatorio.</div>
-            <div *ngIf="nombreCtrl.errors?.['minlength']">Debe tener al menos 3 caracteres.</div>
-            <div *ngIf="nombreCtrl.errors?.['pattern']">Solo se permiten letras.</div>
+            #nombresCtrl="ngModel"
+            class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"/>
+            <div *ngIf="nombresCtrl.invalid && (nombresCtrl.dirty || nombresCtrl.touched)" class="text-red-500 text-sm mt-1">
+            <div *ngIf="nombresCtrl.errors?.['required']">El nombre es obligatorio.</div>
+            <div *ngIf="nombresCtrl.errors?.['minlength']">Debe tener al menos 2 caracteres.</div>
+            <div *ngIf="nombresCtrl.errors?.['pattern']">Solo se permiten letras y espacios.</div>
           </div>
         </div>
 
-        <!-- Sección Datos Personales -->
-        <h3 class="text-lg font-semibold text-gray-800 border-b pb-2 mt-10">
-          Datos Personales de los Emprendedores
-        </h3>
-
-        @for (estudiante of proyecto.estudiantes; track estudiante; let i = $index) {
-<div class="border border-gray-300 rounded-lg p-6 bg-gray-50 mb-8">
-
-  <h4 class="font-semibold text-[#8b5a2b] mb-6">
-    Emprendedor {{ i + 1 }}
-  </h4>
-
-  <!-- CONTENEDOR EN UNA SOLA COLUMNA -->
-  <div class="flex flex-col gap-5">
-
-    <!-- Nombres -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">
-        Nombres <span class="text-red-500">*</span>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="estudiante.nombres"
-        name="nombres{{i}}"
-        required
-        minlength="2"
-        pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"
-        #nombresCtrl="ngModel"
-        class="w-full border border-gray-300 px-4 py-3 rounded-md
-               focus:outline-none focus:ring-2 focus:ring-[#8b5a2b]" />
-    </div>
-
-    <!-- Apellidos -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">
-        Apellidos <span class="text-red-500">*</span>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="estudiante.apellidos"
-        name="apellidos{{i}}"
-        required
-        minlength="2"
-        pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"
-        #apellidosCtrl="ngModel"
-        class="w-full border border-gray-300 px-4 py-3 rounded-md
-               focus:outline-none focus:ring-2 focus:ring-[#8b5a2b]" />
-    </div>
-
-    <!-- Identificación -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">
-        Identificación <span class="text-red-500">*</span>
-      </label>
-      <input
-        type="text"
-        name="identificacion{{i}}"
-        [(ngModel)]="estudiante.identificacion"
-        required
-        minlength="6"
-        pattern="^[0-9]+$"
-        #idCtrl="ngModel"
-        class="w-full border border-gray-300 px-4 py-3 rounded-md
-               focus:outline-none focus:ring-2 focus:ring-[#8b5a2b]" />
-    </div>
-
-    <!-- Programa Académico -->
-    <div *ngIf="estudiante.tipoParticipante !== 'Microempresario externo'">
-      <label class="block text-sm font-medium text-gray-700 mb-1">
-        Programa Académico <span class="text-red-500">*</span>
-      </label>
-      <select
-        [(ngModel)]="estudiante.programaAcademico"
-        name="programa{{ i }}"
-        required
-        #programaCtrl="ngModel"
-        class="w-full border border-gray-300 px-4 py-3 rounded-md
-               focus:outline-none focus:ring-2 focus:ring-[#8b5a2b]">
-        <option value="" disabled selected>Seleccione un programa académico</option>
-        <option *ngFor="let prog of programasAcademicos" [value]="prog">
-          {{ prog }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Celular -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">
-        Celular <span class="text-red-500">*</span>
-      </label>
-      <input
-        type="text"
-        [(ngModel)]="estudiante.tel"
-        name="tel{{i}}"
-        required
-        pattern="^[0-9]{10}$"
-        #telCtrl="ngModel"
-        class="w-full border border-gray-300 px-4 py-3 rounded-md
-               focus:outline-none focus:ring-2 focus:ring-[#8b5a2b]" />
-    </div>
-
-    <!-- Correo -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">
-        Correo electrónico <span class="text-red-500">*</span>
-      </label>
-      <input
-        type="email"
-        name="correo{{i}}"
-        [(ngModel)]="estudiante.correo"
-        required
-        email
-        #correoCtrl="ngModel"
-        class="w-full border border-gray-300 px-4 py-3 rounded-md
-               focus:outline-none focus:ring-2 focus:ring-[#8b5a2b]" />
-    </div>
-
-    <!-- Género -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">
-        Género <span class="text-red-500">*</span>
-      </label>
-      <select
-        [(ngModel)]="estudiante.genero"
-        name="genero{{i}}"
-        required
-        class="w-full border border-gray-300 px-4 py-3 rounded-md
-               focus:outline-none focus:ring-2 focus:ring-[#8b5a2b]">
-        <option value="" disabled selected>Seleccione una opción</option>
-        <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
-      </select>
-    </div>
-
-    <!-- Categoría -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">
-        Categoría <span class="text-red-500">*</span>
-      </label>
-      <select
-        [(ngModel)]="estudiante.tipoParticipante"
-        name="tipoParticipante{{i}}"
-        required
-        class="w-full border border-gray-300 px-4 py-3 rounded-md
-               focus:outline-none focus:ring-2 focus:ring-[#8b5a2b]">
-        <option value="" disabled selected>Seleccione una categoría</option>
-        <option *ngFor="let cat of TipoParticipante" [value]="cat">
-          {{ cat }}
-        </option>
-      </select>
-    </div>
-
-    <!-- Estudiante UPC -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-2">
-        ¿Es estudiante de la Universidad Popular del Cesar? <span class="text-red-500">*</span>
-      </label>
-      <div class="flex gap-10">
-        <label class="inline-flex items-center gap-2">
+        <!-- Apellidos -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Apellidos</label>
           <input
-            type="radio"
-            name="estudianteUPC{{i}}"
-            [(ngModel)]="estudiante.EstudianteUPC"
-            [value]="true"
-            class="text-[#8b5a2b] focus:ring-[#8b5a2b]" />
-          <span>Sí</span>
-        </label>
+            type="text"
+            [(ngModel)]="estudiante.apellidos"
+            name="apellidos{{i}}"
+            required
+            minlength="2"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"
+            #apellidosCtrl="ngModel"
+            class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"/>
+          <div *ngIf="apellidosCtrl.invalid && (apellidosCtrl.dirty || apellidosCtrl.touched)" class="text-red-500 text-sm mt-1">
+            <div *ngIf="apellidosCtrl.errors?.['required']">El apellido es obligatorio.</div>
+            <div *ngIf="apellidosCtrl.errors?.['minlength']">Debe tener al menos 2 caracteres.</div>
+            <div *ngIf="apellidosCtrl.errors?.['pattern']">Solo se permiten letras y espacios.</div>
+          </div>
+        </div>
 
-        <label class="inline-flex items-center gap-2">
+
+        <!-- Identificación -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Identificación</label>
           <input
-            type="radio"
-            name="estudianteUPC{{i}}"
-            [(ngModel)]="estudiante.EstudianteUPC"
-            [value]="false"
-            class="text-[#8b5a2b] focus:ring-[#8b5a2b]" />
-          <span>No</span>
-        </label>
+            type="text"
+            name="identificacion{{i}}"
+            [(ngModel)]="estudiante.identificacion"
+            required
+            minlength="6"
+            pattern="^[0-9]+$"
+            #idCtrl="ngModel"
+            class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          />
+
+          <div *ngIf="idCtrl.invalid && (idCtrl.touched || form.submitted)" class="text-red-500 text-sm mt-1">
+            <div *ngIf="idCtrl.errors?.['required']">La identificación es obligatoria.</div>
+            <div *ngIf="idCtrl.errors?.['minlength']">Debe tener mínimo 6 dígitos.</div>
+            <div *ngIf="idCtrl.errors?.['pattern']">Solo se permiten números.</div>
+          </div>
+        </div>
+
+        <!-- Programa Académico -->
+        <div *ngIf="estudiante.tipoParticipante !== 'Microempresario externo'">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Programa Académico</label>
+          <select
+            [(ngModel)]="estudiante.programaAcademico"
+            name="programa{{ i }}"
+            required
+            #programaCtrl="ngModel"
+            class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          >
+            <option value="" disabled selected>Selecciona un programa académico</option>
+            <option *ngFor="let prog of programasAcademicos" [value]="prog">{{ prog }}</option>
+          </select>
+
+          <div *ngIf="programaCtrl.invalid && (programaCtrl.dirty || programaCtrl.touched)" class="text-red-500 text-sm mt-1">
+            Debes seleccionar un programa académico.
+          </div>
+        </div>
+
+
+
+        <!-- Celular -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Celular</label>
+          <input
+            type="text"
+            [(ngModel)]="estudiante.tel"
+            name="tel{{i}}"
+            required
+            pattern="^[0-9]{10}$"
+            #telCtrl="ngModel"
+            class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"/>
+          <div *ngIf="telCtrl.invalid && (telCtrl.dirty || telCtrl.touched)" class="text-red-500 text-sm mt-1">
+            <div *ngIf="telCtrl.errors?.['required']">El celular es obligatorio.</div>
+            <div *ngIf="telCtrl.errors?.['pattern']">Debe tener 10 números exactos.</div>
+          </div>
+        </div>
+
+        <!-- Correo -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Correo</label>
+          <input
+            type="email"
+            name="correo{{i}}"
+            [(ngModel)]="estudiante.correo"
+            required
+            email
+            #correoCtrl="ngModel"
+            class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          />
+
+          <div *ngIf="correoCtrl.invalid && (correoCtrl.touched || form.submitted)" class="text-red-500 text-sm mt-1">
+            <div *ngIf="correoCtrl.errors?.['required']">El correo es obligatorio.</div>
+            <div *ngIf="correoCtrl.errors?.['email']">Formato inválido de correo.</div>
+          </div>
+        </div>
+
+        <!-- Género -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Género</label>
+          <select [(ngModel)]="estudiante.genero" name="genero{{i}}"
+            class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" required>
+            <option value="" disabled selected>Selecciona un género</option>
+            <option *ngFor="let g of generos" [value]="g">{{ g }}</option>
+          </select>
+        </div>
+
+        <!-- Tipo Participante -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
+          <select [(ngModel)]="estudiante.tipoParticipante" name="tipoParticipante{{i}}"
+            class="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" required>
+            <option value="" disabled selected>Selecciona una categoría</option>
+            <option *ngFor="let cat of TipoParticipante" [value]="cat">{{ cat }}</option>
+          </select>
+        </div>
+        </div>
+
+        <!-- Es estudiante UPC -->
+        <div class="mt-6">
+          <label class="block text-sm font-medium text-green-800 mb-2">
+            ¿Es estudiante de la Universidad Popular del Cesar?
+          </label>
+          <div class="flex flex-col sm:flex-row gap-6">
+            <label class="inline-flex items-center gap-2">
+                <input type="radio" name="estudianteUPC{{i}}" [(ngModel)]="estudiante.EstudianteUPC" [value]="true"
+                class="text-green-600 focus:ring-green-400" />
+                <span class="text-gray-800">Sí</span>
+            </label>
+
+            <label class="inline-flex items-center gap-2">
+                <input type="radio" name="estudianteUPC{{i}}" [(ngModel)]="estudiante.EstudianteUPC" [value]="false"
+                class="text-green-600 focus:ring-green-400" />
+                <span class="text-gray-800">No</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Botón Eliminar -->
+        <div class="mt-6 flex justify-end">
+          <button (click)="eliminarEstudiante(i)" type="button"
+            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+            Eliminar
+          </button>
+        </div>
       </div>
-    </div>
+      }
 
-  </div>
-
-  <!-- Eliminar estudiante -->
-  <div class="mt-6 text-right">
-    <button
-      type="button"
-      (click)="eliminarEstudiante(i)"
-      class="text-red-600 text-sm hover:underline">
-      Eliminar emprendedor
-    </button>
-  </div>
-
-</div>
-}
-
-
-        <!-- Agregar -->
-        <button type="button" (click)="agregarEstudiante()"
-          class="text-[#8b5a2b] font-medium hover:underline">
-          + Agregar otro emprendedor
+      <!-- Botón Agregar -->
+      <div class="mt-6">
+        <button (click)="agregarEstudiante()" type="button"
+          class="bg-green-600 text-white px-5 py-3 rounded-lg hover:bg-green-700 transition w-full sm:w-auto">
+          + Agregar otro Emprendedor
         </button>
+      </div>
+        <!-- Redes Sociales -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Redes Sociales</label>
+          <input type="text" [(ngModel)]="proyecto.redesSociales" name="redesSociales"
+            placeholder="Ej: @Bolsos_bonitos"
+            class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400" />
+        </div>
 
-        <!-- Botón final -->
-        <div class="pt-6 border-t">
+        <!-- Logo -->
+        <div class="mb-6">
+          <label class="block font-semibold mb-1 text-gray-800">Logo del Proyecto 📁</label>
+          <input type="file" (change)="onLogoSelected($event)"
+            class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
+            accept="image/*" />
+            @if (proyecto.logo) {
+              <div class="text-sm text-gray-600 mt-2">Archivo seleccionado: {{ proyecto.logo}}</div>
+          }
+        </div>
+
+       <!-- Botón Registrar -->
+        <div class="text-center sm:text-right">
           <button
             type="submit"
             [disabled]="form.invalid"
-            class="bg-[#8b5a2b] text-white px-8 py-3 rounded-md hover:bg-[#73471f] transition disabled:opacity-50">
+            class="w-full sm:w-auto bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition disabled:opacity-50">
             Registrar Proyecto
           </button>
         </div>
-
       </form>
-
-      <div *ngIf="registroExitoso"
-           class="mt-4 p-3 bg-green-100 border border-green-300 text-green-800 rounded">
-        ✅ Registro exitoso.
-      </div>
-
+    <div *ngIf="registroExitoso" class="mt-3 p-2 bg-green-100 text-green-700 rounded-lg border border-green-400">
+      ✅ Registro exitoso.
     </div>
   </div>
 </div>
