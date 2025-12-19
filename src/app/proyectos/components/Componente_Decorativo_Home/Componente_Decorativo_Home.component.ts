@@ -49,14 +49,6 @@ export class ComponenteDecorativoHomeComponent implements OnInit, OnDestroy{
       boton: 'Saber más',
     },
     {
-      titulo: 'Contáctanos',
-      descripcion:
-        '¿Tienes una idea, propuesta o simplemente quieres hablar con nosotros? Nuestro equipo está listo para escucharte, acompañarte y guiarte en tu camino emprendedor. ¡Escríbenos!',
-      imagen: 'image/Decorador/foto3.png',
-      link: '/contacto',
-      boton: 'Contactar',
-    },
-    {
       titulo: 'Unidad de Emprendimiento',
       descripcion:
         'Nuestra unidad está diseñada para acompañar, formar y fortalecer a los emprendedores desde sus primeros pasos. Conoce todos los programas, mentorías y herramientas que tenemos para ti.',

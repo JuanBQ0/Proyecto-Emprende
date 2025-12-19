@@ -1,6 +1,6 @@
 <app-navbar-docente></app-navbar-docente>
 
-<main class="ml-64 min-h-screen bg-green-100 p-6 sm:p-8 md:p-12 lg:p-16">
+<main class="ml-64 min-h-screen bg-white p-6 sm:p-8 md:p-12 lg:p-16">
 
   <h1 class="text-3xl font-bold mb-8 text-green-800">📄 Gestión de Informes</h1>
 
@@ -67,7 +67,7 @@
 
   <!-- Lista filtrada -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let informe of informesFiltrados; let i = index" class="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+    <div *ngFor="let informe of informesFiltrados; let i = index" class="bg-green-200 p-4 rounded-lg shadow-md flex flex-col justify-between">
       <div>
         <h3 class="font-bold text-green-800">{{ informe.nombre }}</h3>
         <p class="text-gray-600 text-sm">{{ informe.descripcion }}</p>

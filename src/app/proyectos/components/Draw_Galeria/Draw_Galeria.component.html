@@ -1,16 +1,52 @@
-<!-- Filtro por programas académicos -->
-<div class="w-full md:w-[260px] text-slate-300 h-screen overflow-y-auto px-8 py-20">
-  <h3 class="text-white font-bold text-lg mb-4 p-2">Programas Académicos</h3>
-  <nav class="space-y-2">
-    @for (programa of proyectoService.programas; track programa) {
+<!-- SIDEBAR FILTROS (desplegable con scroll interno) -->
+<div class="w-full md:w-[260px] text-slate-300 px-6 py-10
+            border border-gray-500 rounded-lg shadow-md">
+
+  <!-- Título -->
+  <h3 class="text-black font-bold text-xl mb-6">Filtros</h3>
+
+  <!-- BOTÓN PRINCIPAL QUE ABRE/CERRAR PROGRAMAS -->
+  <button
+    (click)="toggleProgramas()"
+    class="w-full flex items-center justify-between px-3 py-3 text-white bg-[#232523] rounded-lg cursor-pointer hover:bg-[#2d2f2d] transition">
+
+    <span class="font-semibold">Programas Académicos</span>
+
+    <!-- Flecha animada -->
+    <span class="transition-transform duration-300" [class.rotate-180]="programasAbiertos">
+      ▼
+    </span>
+  </button>
+
+  <!-- CONTENEDOR DESPLEGABLE -->
+  <div
+    class="mt-2 overflow-hidden transition-all duration-300 text-black"
+    [style.maxHeight]="programasAbiertos ? '700px' : '0px'">
+
+    <div class="overflow-y-auto pr-2 max-h-[700px]">
+
+      <!-- OPCIÓN TODOS -->
       <a
-        class="relative flex items-center px-3 py-2 rounded cursor-pointer border-b border-gray-700 last:border-0 font-medium
-               hover:bg-[#232523] hover:text-white transition-colors"
-        [class.bg-[#232523]]="selectedPrograma === programa"
-        [class.text-white]="selectedPrograma === programa"
-        (click)="seleccionarPrograma(programa)">
-        {{ programa }}
+        class="block px-4 py-2 mt-2 rounded cursor-pointer border-b border-gray-600 font-medium
+               hover:bg-[#2d2f2d] hover:text-white transition-colors"
+        [class.bg-[#2d2f2d]]="!selectedPrograma"
+        [class.text-white]="!selectedPrograma"
+        (click)="resetPrograma()">
+        Todos
       </a>
-    }
-  </nav>
+
+      <!-- PROGRAMAS -->
+      @for (programa of proyectoService.programas; track programa) {
+        <a
+          class="block px-4 py-2 rounded cursor-pointer border-b border-gray-600 last:border-0 font-medium
+                 hover:bg-[#2d2f2d] hover:text-white transition-colors"
+          [class.bg-[#2d2f2d]]="selectedPrograma === programa"
+          [class.text-white]="selectedPrograma === programa"
+          (click)="seleccionarPrograma(programa)">
+          {{ programa }}
+        </a>
+      }
+
+    </div>
+  </div>
 </div>

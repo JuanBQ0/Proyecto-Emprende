@@ -54,4 +54,9 @@ export class DrawGaleriaComponent {
     this.proyectoService.eliminarProyecto(id);
     this.proyectos = this.proyectoService.obtenerProyectosRegistrados(); // actualizar lista
   }
+  resetPrograma() {
+  this.selectedPrograma = null;
+  this.proyectoService.setProgramaSeleccionado(null);
+}
+
 }
